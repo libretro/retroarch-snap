@@ -9,7 +9,6 @@ grade: stable
 apps:
   retroarch:
     command: usr/local/bin/retroarch.wrapper
-    #https://snapcraft.io/docs/reference/interfaces
     plugs: [network, network-bind, x11, opengl, home, alsa, pulseaudio, bluez]
 
 parts:
@@ -18,7 +17,6 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.6.7.tar.gz
    configflags:  
-     #- --enable-vulkan
      - --enable-kms
      - --enable-xvideo
      - --enable-ffmpeg
@@ -37,9 +35,6 @@ parts:
    stage-packages:
      - fonts-dejavu-core
      - libasound2
-     #- libavcodec57 (yakkety)
-     #- libavformat57 (yakkety)
-     #- libavutil55 (yakkety)
      - libavcodec-ffmpeg56
      - libavformat-ffmpeg56
      - libavutil-ffmpeg54
@@ -54,9 +49,7 @@ parts:
      - libminizip1
      - libopenal1
      - libpulse0
-     #- libswresample2 (yakkety)
      - libswresample-ffmpeg1
-     #- libswscale4 (yakkety)
      - libswscale-ffmpeg3
      - libudev1
      - libusb-1.0-0
@@ -70,7 +63,6 @@ parts:
      - libxxf86vm1
      - pulseaudio
      - zlib1g
-     #- mesa-vulkan-drivers
    build-packages:
      - gcc
      - make
