@@ -53,6 +53,7 @@ parts:
      - libgles2-mesa
      - libminizip1
      - libopenal1
+     - libpulse0
      #- libswresample2 (yakkety)
      - libswresample-ffmpeg1
      #- libswscale4 (yakkety)
@@ -83,6 +84,7 @@ parts:
      - libfreetype6-dev 
      - libgbm-dev
      - libgl1-mesa-dev
+     - libpulse-dev
      - libswscale-dev
      - libusb-1.0-0-dev
      - libudev-dev
