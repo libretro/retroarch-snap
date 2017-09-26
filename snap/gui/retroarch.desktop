@@ -9,3 +9,4 @@ Terminal=false
 StartupNotify=false
 Keywords=multi;engine;emulator;xmb;
 Categories=Game;Emulator;
+Exec=retroarch.wrapper
