@@ -9,7 +9,7 @@ grade: stable
 apps:
   retroarch:
     command: usr/local/bin/retroarch.wrapper
-    plugs: [network, network-bind, x11, opengl, home, alsa, pulseaudio, bluez, joystick, raw-usb, removable-media]
+    plugs: [network, network-bind, x11, opengl, home, alsa, pulseaudio, bluez, joystick, raw-usb, removable-media, udisks2]
 
 parts:
   retroarch:
