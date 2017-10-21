@@ -1,6 +1,6 @@
 #!/bin/sh
 
-notify-send "RetroArch: Preparing the environment..."
+notify-send "RetroArch" "Preparing the environment..."
 
 set -e
 
@@ -37,7 +37,7 @@ export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$LD_LIBRARY_PATH
 # Otherwise XOpenIM failed
 export XLOCALEDIR=$SNAP/usr/share/X11/locale
 
-notify-send "RetroArch: Copying necessary files (this could take a minute)..."
+notify-send "RetroArch" "Copying necessary files (this could take a minute)..."
 
 #Create RetroArch user configuration directory if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
@@ -63,7 +63,7 @@ notify-send "RetroArch: Copying necessary files (this could take a minute)..."
 #Copy shaders if doesn't exist 
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
-notify-send "RetroArch: Done!"
+notify-send "RetroArch" "Done!"
 
 touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
