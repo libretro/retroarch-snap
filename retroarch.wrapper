@@ -59,5 +59,7 @@ export XLOCALEDIR=$SNAP/usr/share/X11/locale
 #Copy shaders if doesn't exist 
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
+touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+
 $SNAP/usr/local/bin/retroarch $*
 
