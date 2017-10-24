@@ -9,4 +9,4 @@ Terminal=false
 StartupNotify=false
 Keywords=multi;engine;emulator;xmb;
 Categories=Game;Emulator;
-Exec=${SNAP}/bin/retroarch.wrapper
+Exec=retroarch
