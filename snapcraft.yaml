@@ -33,6 +33,7 @@ parts:
      - --disable-v4l2
      - --disable-xinerama    
    stage-packages:
+     - libnotify-bin
      - fonts-dejavu-core
      - libasound2
      - libavcodec-ffmpeg56
