@@ -1,6 +1,10 @@
 #!/bin/sh
 
-notify-send "RetroArch" "Preparing the environment..." -i $SNAP/invader_light.png
+#Copy icon for notifications if it doesn't exist
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/invader_light.png" ] cp $SNAP/invader_light.png "$SNAP_USER_DATA/.config/retroarch/invader_light.png"
+
+#Notify user that we're working so they don't think anything is broken
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] notify-send "RetroArch" "Preparing the environment..." -i "$SNAP_USER_DATA/.config/retroarch/invader_light.png" -t 2000
 
 set -e
 
@@ -37,7 +41,8 @@ export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$LD_LIBRARY_PATH
 # Otherwise XOpenIM failed
 export XLOCALEDIR=$SNAP/usr/share/X11/locale
 
-notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i $SNAP/invader_light.png
+#Notify the user that it might take a while to copy everything
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP_USER_DATA/.config/retroarch/invader_light.png" -t 2000
 
 #Create RetroArch user configuration directory if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
@@ -63,8 +68,9 @@ notify-send "RetroArch" "Copying necessary files (this could take a minute)..." 
 #Copy shaders if doesn't exist 
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
-notify-send "RetroArch" "Done!" -i $SNAP/invader_light.png
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ]notify-send "RetroArch" "Done!" -i $SNAP/invader_light.png
 
+#If the config file doesn't exist, create it and point the browser directory outside of the snap package
 touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
 $SNAP/usr/local/bin/retroarch $*
