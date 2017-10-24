@@ -92,7 +92,6 @@ parts:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
     stage:
     - usr/local/bin/retroarch.wrapper
-    install: snap connect retroarch:home
   retroarch-assets:
     plugin: dump
     source: https://github.com/libretro/retroarch-assets/archive/master.tar.gz
