@@ -1,6 +1,7 @@
 #!/bin/sh
+
 #Notify user that we're working so they don't think anything is broken
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Preparing the environment..." -i -t 2000
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Preparing the environment..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 set -e
 
@@ -38,7 +39,7 @@ export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$LD_LIBRARY_PATH
 export XLOCALEDIR=$SNAP/usr/share/X11/locale
 
 #Notify the user that it might take a while to copy everything
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -t 2000
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #Create RetroArch user configuration directory if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
@@ -64,7 +65,7 @@ export XLOCALEDIR=$SNAP/usr/share/X11/locale
 #Copy shaders if doesn't exist 
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
-[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!"
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
