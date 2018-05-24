@@ -31,7 +31,8 @@ parts:
      - --disable-sdl2
      - --disable-vg
      - --disable-v4l2
-     - --disable-xinerama    
+     - --disable-xinerama
+     - --enable-qt
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
@@ -64,6 +65,7 @@ parts:
      - libxxf86vm1
      - pulseaudio
      - zlib1g
+     - qt5-default
    build-packages:
      - gcc
      - make
@@ -86,6 +88,7 @@ parts:
      - mesa-common-dev
      - xserver-xorg-input-all
      - zlib1g-dev
+     - qt5-default
   retroarch-wrapper:
     plugin: dump
     source: .
