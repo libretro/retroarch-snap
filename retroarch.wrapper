@@ -70,5 +70,5 @@ export XLOCALEDIR=$SNAP/usr/share/X11/locale
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
-$SNAP/usr/local/bin/retroarch "$@"
+desktop-launch $SNAP/usr/local/bin/retroarch "$@"
 
