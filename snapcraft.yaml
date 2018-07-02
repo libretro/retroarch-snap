@@ -8,7 +8,7 @@ grade: stable
 
 apps:
   retroarch:
-    command: usr/local/bin/retroarch.wrapper
+    command: desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
     plugs: [network, network-bind, x11, opengl, home, alsa, pulseaudio, bluez, joystick, raw-usb, removable-media, wayland, unity7]
 
 parts:
@@ -41,7 +41,6 @@ parts:
      - libavcodec-ffmpeg56
      - libavformat-ffmpeg56
      - libavutil-ffmpeg54
-     - libc6
      - libdrm2
      - libegl1-mesa
      - libfreetype6
@@ -68,6 +67,12 @@ parts:
      - zlib1g
      - qt5-default
      - libqt5waylandclient5
+     - libstdc++6
+     - libgcc1
+     - liblzma5
+     - libbz2-1.0
+     - libpcre3
+     - libsystemd0
    build-packages:
      - gcc
      - make

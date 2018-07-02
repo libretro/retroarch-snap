@@ -5,39 +5,6 @@
 
 set -e
 
-case "$SNAP_ARCH" in
-    "amd64") ARCH='x86_64-linux-gnu'
-    ;;
-    "i386") ARCH='i386-linux-gnu'
-    ;;
-    "armhf") ARCH='arm-linux-gnueabihf'
-    ;;
-    *)
-        echo "Unsupported architecture for this app build"
-        exit 1
-    ;;
-esac
-
-
-export LD_LIBRARY_PATH="$SNAP/usr/lib/$ARCH/dri:$SNAP/usr/lib/$ARCH/alsa-lib:$LD_LIBRARY_PATH"
-export XDG_DATA_HOME="$SNAP/usr/share"
-export FONTCONFIG_PATH="$SNAP/etc/fonts/config.d"
-export FONTCONFIG_FILE="$SNAP/etc/fonts/fonts.conf"
-export XKB_CONFIG_ROOT="$SNAP/usr/share/X11/xkb"
-
-# Mesa Libs
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa-egl:$LD_LIBRARY_PATH
-
-# Tell libGL where to find the drivers
-export LIBGL_DRIVERS_PATH=$SNAP/usr/lib/$ARCH/dri
-
-# ensure that our HW/opengl libs are before the snap specific libs
-export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$LD_LIBRARY_PATH
-
-# Otherwise XOpenIM failed
-export XLOCALEDIR=$SNAP/usr/share/X11/locale
-
 #Notify the user that it might take a while to copy everything
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
@@ -70,5 +37,5 @@ export XLOCALEDIR=$SNAP/usr/share/X11/locale
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
-desktop-launch $SNAP/usr/local/bin/retroarch "$@"
+exec $SNAP/usr/local/bin/retroarch "$@"
 
