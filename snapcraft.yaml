@@ -34,6 +34,7 @@ parts:
      - --disable-v4l2
      - --disable-xinerama
      - --enable-qt
+     - --enable-vulkan
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
@@ -73,6 +74,7 @@ parts:
      - libbz2-1.0
      - libpcre3
      - libsystemd0
+     - libvulkan1
    build-packages:
      - gcc
      - make
@@ -96,6 +98,7 @@ parts:
      - xserver-xorg-input-all
      - zlib1g-dev
      - qt5-default
+     - libvulkan-dev
   retroarch-wrapper:
     plugin: dump
     source: .
