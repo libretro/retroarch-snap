@@ -29,7 +29,7 @@ parts:
      - --disable-roar
      - --disable-rsound
      - --disable-sdl
-     - --enable-sdl2
+     - --disable-sdl2
      - --disable-vg
      - --disable-v4l2
      - --disable-xinerama
@@ -39,9 +39,9 @@ parts:
      - libnotify-bin
      - fonts-dejavu-core
      - libasound2
-     - libavcodec57
-     - libavformat57
-     - libavutil55
+     - libavcodec-ffmpeg56
+     - libavformat-ffmpeg56
+     - libavutil-ffmpeg54
      - libdrm2
      - libegl1-mesa
      - libfreetype6
@@ -52,8 +52,8 @@ parts:
      - libminizip1
      - libopenal1
      - libpulse0
-     - libswresample2
-     - libswscale4
+     - libswresample-ffmpeg1
+     - libswscale-ffmpeg3
      - libudev1
      - libusb-1.0-0
      - libwayland-client0
@@ -75,8 +75,6 @@ parts:
      - libpcre3
      - libsystemd0
      - libvulkan1
-     - libsdl2-2.0-0
-     - libc6
    build-packages:
      - gcc
      - make
@@ -101,7 +99,6 @@ parts:
      - zlib1g-dev
      - qt5-default
      - libvulkan-dev
-     - libsdl2-dev
   retroarch-wrapper:
     plugin: dump
     source: .
