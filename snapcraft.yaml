@@ -78,6 +78,8 @@ parts:
      - libsdl2-2.0-0
      - libass5
      - libfribidi0
+     - libcurl3
+     - libusb-1.0-0
    build-packages:
      - gcc
      - make
