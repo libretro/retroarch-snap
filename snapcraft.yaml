@@ -29,7 +29,7 @@ parts:
      - --disable-roar
      - --disable-rsound
      - --disable-sdl
-     - --disable-sdl2
+     - --enable-sdl2
      - --disable-vg
      - --disable-v4l2
      - --disable-xinerama
@@ -75,6 +75,9 @@ parts:
      - libpcre3
      - libsystemd0
      - libvulkan1
+     - libsdl2-2.0-0
+     - libass5
+     - libfribidi0
    build-packages:
      - gcc
      - make
@@ -99,6 +102,7 @@ parts:
      - zlib1g-dev
      - qt5-default
      - libvulkan-dev
+     - libsdl2-dev
   retroarch-wrapper:
     plugin: dump
     source: .
