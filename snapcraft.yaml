@@ -79,7 +79,6 @@ parts:
      - libass5
      - libfribidi0
      - libcurl4
-     - libusb-1.0-0
      - libsdl1.2debian
    build-packages:
      - gcc
