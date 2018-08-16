@@ -1,3 +1,4 @@
+[![Snap Status](https://build.snapcraft.io/badge/libretro/retroarch-snap.svg)](https://build.snapcraft.io/user/libretro/retroarch-snap)
 # RetroArch Snap
 
 This project creates a working snap of RetroArch.
