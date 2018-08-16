@@ -79,6 +79,7 @@ parts:
      - libass5
      - libfribidi0
      - libsdl1.2debian
+     - libsdl-net1.2
    build-packages:
      - gcc
      - make
