@@ -78,7 +78,6 @@ parts:
      - libsdl2-2.0-0
      - libass5
      - libfribidi0
-     - libcurl4
      - libsdl1.2debian
    build-packages:
      - gcc
