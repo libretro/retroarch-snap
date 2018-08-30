@@ -15,7 +15,7 @@ parts:
   retroarch:
    plugin: autotools
    source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.7.3.tar.gz
+   source: https://github.com/libretro/RetroArch/archive/v1.7.4.tar.gz
    after: [desktop-qt5]
    configflags:  
      - --enable-kms
