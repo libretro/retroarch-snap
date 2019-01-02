@@ -80,6 +80,8 @@ parts:
      - libfribidi0
      - libsdl1.2debian
      - libsdl-net1.2
+     - libbluetooth3
+     - libxi6
    build-packages:
      - gcc
      - make
