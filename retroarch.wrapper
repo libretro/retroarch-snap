@@ -9,7 +9,7 @@ set -e
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #Create RetroArch user configuration directory if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
+#[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy assets if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/assets" ] && cp -R "$SNAP/.config/assets" "$SNAP_USER_DATA/.config/retroarch"
