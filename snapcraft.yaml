@@ -15,7 +15,7 @@ parts:
   retroarch:
    plugin: autotools
    source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.7.5.tar.gz
+   source: https://github.com/libretro/RetroArch/archive/v1.7.6.tar.gz
    after: [desktop-qt5]
    configflags:  
      - --enable-kms
@@ -35,6 +35,7 @@ parts:
      - --disable-xinerama
      - --enable-qt
      - --enable-vulkan
+     - --disable-discord
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
