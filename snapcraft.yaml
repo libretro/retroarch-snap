@@ -76,6 +76,7 @@ parts:
      - libpcre3
      - libsystemd0
      - libvulkan1
+     - libvulkan-dev
      - libsdl2-2.0-0
      - libass5
      - libfribidi0
