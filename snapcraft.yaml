@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.7.6"
+version: "1.7.7"
 summary: RetroArch
 description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
@@ -15,7 +15,7 @@ parts:
   retroarch:
    plugin: autotools
    source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.7.6.tar.gz
+   source: https://github.com/libretro/RetroArch/archive/v1.7.7.tar.gz
    after: [desktop-qt5]
    configflags:  
      - --enable-kms
