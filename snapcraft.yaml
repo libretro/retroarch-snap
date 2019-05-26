@@ -124,8 +124,12 @@ parts:
     organize:
      xmb: .config/assets/xmb
      glui: .config/assets/glui
+     rgui: .config/assets/rgui
+     ozone: .config/assets/ozone
+     sounds: .config/assets/sounds
+     menu_widgets: .config/assets/menu_widgets
     filesets:
-      assets: [.config/assets/xmb/*, -.config/assets/xmb/*/src, .config/assets/glui/*.png, .config/assets/glui/*.ttf]
+      assets: [.config/assets/menu_widgets/*, .config/assets/sounds/*, .config/assets/ozone/*, .config/assets/rgui/*, .config/assets/xmb/*, -.config/assets/xmb/*/src, .config/assets/glui/*.png, .config/assets/glui/*.ttf]
     stage:
     - -configure
     - -Makefile
@@ -179,8 +183,8 @@ parts:
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     organize:
-     "*": .config/shaders/
+     "*": .config/shaders/shaders_glsl
     stage:
      - -configure
      - -Makefile
-     - .config/shaders
+     - .config/shaders/shaders_glsl
