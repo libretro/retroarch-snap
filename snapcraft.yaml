@@ -178,7 +178,7 @@ parts:
      "*": .config/overlay
     stage:
      - .config/overlay
-  retroarch-shaders:
+  retroarch-glsl-shaders:
     plugin: dump
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
@@ -188,3 +188,13 @@ parts:
      - -configure
      - -Makefile
      - .config/shaders/shaders_glsl
+   retroarch-slang-shaders:
+    plugin: dump
+    source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
+    source-type : tar
+    organize:
+     "*": .config/shaders/shaders_slang
+    stage:
+     - -configure
+     - -Makefile
+     - .config/shaders/shaders_slang
