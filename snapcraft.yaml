@@ -188,7 +188,7 @@ parts:
      - -configure
      - -Makefile
      - .config/shaders/shaders_glsl
-   retroarch-slang-shaders:
+  retroarch-slang-shaders:
     plugin: dump
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
