@@ -20,7 +20,6 @@ parts:
    override-prime: |
      snapcraftctl prime
      ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so
-     ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so.1
    configflags:  
      - --enable-kms
      - --enable-xvideo
