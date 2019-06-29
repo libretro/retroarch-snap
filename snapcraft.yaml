@@ -17,8 +17,8 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.7.tar.gz
    after: [desktop-qt5]
-   override-prime: |
-     snapcraftctl prime
+   override-stage: |
+     snapcraftctl stage
      ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so
    configflags:  
      - --enable-kms
