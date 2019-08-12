@@ -19,7 +19,7 @@ parts:
    after: [desktop-qt5]
    override-build: |
      snapcraftctl build
-     ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so
+     ln -s /build/retroarch/parts/retroarch/install/usr/lib/libvulkan.so /build/retroarch/parts/retroarch/install/lib/libvulkan.so
    configflags:  
      - --enable-kms
      - --enable-xvideo
