@@ -19,7 +19,7 @@ parts:
    after: [desktop-qt5]
    override-build: |
      snapcraftctl build
-     ln -s $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so $SNAPCRAFT_PART_INSTALL/lib/$SNAP_ARCH_TRIPLET/libvulkan.so
+     ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so
    configflags:  
      - --enable-kms
      - --enable-xvideo
