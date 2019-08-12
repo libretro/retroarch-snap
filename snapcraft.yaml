@@ -17,9 +17,9 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.7.tar.gz
    after: [desktop-qt5]
-   override-stage: |
-     snapcraftctl stage
-     ln -s usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so lib/$SNAP_ARCH_TRIPLET/libvulkan.so
+   override-build: |
+     snapcraftctl build
+     ln -s $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAP_ARCH_TRIPLET/libvulkan.so $SNAPCRAFT_PART_INSTALL/lib/$SNAP_ARCH_TRIPLET/libvulkan.so
    configflags:  
      - --enable-kms
      - --enable-xvideo
