@@ -20,6 +20,7 @@ parts:
    override-build: |
      snapcraftctl build
      cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libvulkan* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
+     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libVk* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
    configflags:  
      - --enable-kms
      - --enable-xvideo
