@@ -17,10 +17,10 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.7.tar.gz
    after: [desktop-qt5]
-   override-build: |
-     snapcraftctl build
-     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libvulkan* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
-     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libVk* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
+#   override-build: |
+#     snapcraftctl build
+#     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libvulkan* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
+#     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libVk* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
    configflags:  
      - --enable-kms
      - --enable-xvideo
@@ -202,3 +202,9 @@ parts:
 #     - -configure
 #     - -Makefile
 #     - .config/shaders/shaders_slang
+
+  fixup-vulkan-icd-paths:
+    plugin: nil
+    after: [retroarch-glsl-shaders]
+    override-build: |
+      sed -i -E 's,(^.+"library_path": ")/.*/,\1,' $SNAPCRAFT_STAGE/usr/share/vulkan/icd.d/*.json
