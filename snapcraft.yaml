@@ -110,9 +110,9 @@ parts:
      - libvulkan-dev
      - libsdl2-dev
     prime:
-      - bin/
-      - lib/
-      - usr/
+     - bin/
+     - lib/
+     - usr/
   retroarch-wrapper:
     plugin: dump
     source: .
