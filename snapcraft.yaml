@@ -109,7 +109,7 @@ parts:
      - qt5-default
      - libvulkan-dev
      - libsdl2-dev
-    prime:
+   prime:
      - bin/
      - lib/
      - usr/
