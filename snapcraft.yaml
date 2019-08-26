@@ -5,7 +5,6 @@ description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
 grade: stable
 
-
 apps:
   retroarch:
     command: desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
@@ -17,10 +16,6 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.8.tar.gz
    after: [desktop-qt5]
-#   override-build: |
-#     snapcraftctl build
-#     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libvulkan* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
-#     cp $SNAPCRAFT_PART_INSTALL/usr/lib/*/libVk* $SNAPCRAFT_PART_INSTALL/lib/*linux*/
    configflags:  
      - --enable-kms
      - --enable-xvideo
