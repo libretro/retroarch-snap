@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.7.7"
+version: "1.7.8"
 summary: RetroArch
 description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
@@ -15,7 +15,7 @@ parts:
   retroarch:
    plugin: autotools
    source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.7.7.tar.gz
+   source: https://github.com/libretro/RetroArch/archive/v1.7.8.tar.gz
    after: [desktop-qt5]
 #   override-build: |
 #     snapcraftctl build
@@ -186,21 +186,11 @@ parts:
     plugin: dump
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
-    organize:
-     "*": .config/shaders/shaders_glsl
-    stage:
-     - -configure
-     - -Makefile
-     - .config/shaders/shaders_glsl
+    override-build: |
+      make install INSTALLDIR=.config/shaders/shaders_glsl
   retroarch-slang-shaders:
     plugin: dump
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
-    organize:
-     "*": .config/shaders/shaders_slang
-    stage:
-     - -configure
-     - -Makefile
-     - .config/shaders/shaders_slang
-    prime:
-     - .config/shaders/shaders_slang
+    override-build: |
+      make install INSTALLDIR=.config/shaders/shaders_slang
