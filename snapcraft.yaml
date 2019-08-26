@@ -122,10 +122,10 @@ parts:
      - qt5-default
      - libvulkan-dev
      - libsdl2-dev
-   prime:
-     - bin/
-     - lib/
-     - usr/
+#   prime:
+#     - bin/
+#     - lib/
+#     - usr/
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
