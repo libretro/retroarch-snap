@@ -183,12 +183,14 @@ parts:
      - .config/overlay
   retroarch-glsl-shaders:
     plugin: dump
+    after: [retroarch-overlays]
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     override-build: |
       make install INSTALLDIR=.config/shaders/shaders_glsl
   retroarch-slang-shaders:
     plugin: dump
+    after: [retroarch-glsl-shaders]
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
     override-build: |
