@@ -187,6 +187,7 @@ parts:
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     override-build: |
+      snapcraftctl build
       make install INSTALLDIR=.config/shaders/shaders_glsl
   retroarch-slang-shaders:
     plugin: dump
@@ -194,4 +195,5 @@ parts:
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
     override-build: |
+      snapcraftctl build
       make install INSTALLDIR=.config/shaders/shaders_slang
