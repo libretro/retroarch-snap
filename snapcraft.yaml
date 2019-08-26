@@ -46,7 +46,7 @@ parts:
      - --disable-v4l2
      - --disable-xinerama
      - --enable-qt
-     - --enable-vulkan
+     - --disable-vulkan
      - --disable-discord
    stage-packages:
      - libnotify-bin
@@ -128,7 +128,6 @@ parts:
 #     - usr/
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
@@ -136,7 +135,6 @@ parts:
     - usr/local/bin/retroarch.wrapper
   retroarch-assets:
     plugin: dump
-    after: [retroarch-wrapper]
     source: https://github.com/libretro/retroarch-assets/archive/master.tar.gz
     source-type: tar
     organize:
@@ -156,7 +154,6 @@ parts:
     - $assets
   retroarch-autoconfig:
     plugin: dump
-    after: [retroarch-assets]
     source: https://github.com/libretro/retroarch-joypad-autoconfig/archive/master.tar.gz
     source-type: tar
     organize:
@@ -172,7 +169,6 @@ parts:
     - $autoconfig
   retroarch-database:
     plugin: dump
-    after: [retroarch-autoconfig]
     source: https://github.com/libretro/libretro-database/archive/master.tar.gz
     source-type : tar
     organize: 
@@ -184,7 +180,6 @@ parts:
      - .config/cheats
   retroarch-info:
     plugin: dump
-    after: [retroarch-database]
     source: https://github.com/libretro/libretro-super/archive/master.tar.gz
     source-type : tar
     organize:
@@ -193,7 +188,6 @@ parts:
      - .config/cores
   retroarch-overlays:
     plugin: dump
-    after: [retroarch-info]
     source: https://github.com/libretro/common-overlays/archive/master.tar.gz
     source-type : tar
     organize:
@@ -202,7 +196,6 @@ parts:
      - .config/overlay
   retroarch-glsl-shaders:
     plugin: dump
-    after: [retroarch-overlays]
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     organize:
@@ -211,7 +204,6 @@ parts:
      - .config/shaders/shaders_glsl
   retroarch-slang-shaders:
     plugin: dump
-    after: [retroarch-glsl-shaders]
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
     organize:
