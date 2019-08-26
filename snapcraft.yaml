@@ -182,7 +182,7 @@ parts:
     stage:
      - .config/overlay
   retroarch-glsl-shaders:
-    plugin: dump
+    plugin: autotools
     after: [retroarch-overlays]
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
@@ -190,7 +190,7 @@ parts:
       snapcraftctl build
       make install INSTALLDIR=.config/shaders/shaders_glsl
   retroarch-slang-shaders:
-    plugin: dump
+    plugin: autotools
     after: [retroarch-glsl-shaders]
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
