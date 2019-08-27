@@ -5,11 +5,23 @@ description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
 grade: stable
 
-
 apps:
   retroarch:
     command: desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
-    plugs: [network, network-bind, x11, opengl, home, alsa, pulseaudio, bluez, joystick, raw-usb, removable-media, wayland, unity7]
+    plugs:
+      - network
+      - network-bind
+      - x11
+      - opengl
+      - home
+      - alsa
+      - pulseaudio
+      - bluez
+      - joystick
+      - raw-usb
+      - removable-media
+      - wayland
+      - unity7
 
 parts:
   retroarch:
@@ -17,6 +29,8 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.8.tar.gz
    after: [desktop-qt5]
+#   build-on: [ amd64, i386, armhf, arm64, ppc64el ]
+   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    configflags:  
      - --enable-kms
      - --enable-xvideo
@@ -24,7 +38,6 @@ parts:
      - --enable-ssa 
      - --disable-coreaudio
      - --disable-jack
-     - --disable-python
      - --enable-pulse
      - --disable-roar
      - --disable-rsound
@@ -34,7 +47,7 @@ parts:
      - --disable-v4l2
      - --disable-xinerama
      - --enable-qt
-     - --disable-vulkan
+     - --enable-vulkan
      - --disable-discord
    stage-packages:
      - libnotify-bin
@@ -110,8 +123,13 @@ parts:
      - qt5-default
      - libvulkan-dev
      - libsdl2-dev
+   prime:
+     - bin/
+     - lib/
+     - usr/
   retroarch-wrapper:
     plugin: dump
+    after: [retroarch]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
@@ -119,6 +137,7 @@ parts:
     - usr/local/bin/retroarch.wrapper
   retroarch-assets:
     plugin: dump
+    after: [retroarch-wrapper]
     source: https://github.com/libretro/retroarch-assets/archive/master.tar.gz
     source-type: tar
     organize:
@@ -138,6 +157,7 @@ parts:
     - $assets
   retroarch-autoconfig:
     plugin: dump
+    after: [retroarch-assets]
     source: https://github.com/libretro/retroarch-joypad-autoconfig/archive/master.tar.gz
     source-type: tar
     organize:
@@ -153,6 +173,7 @@ parts:
     - $autoconfig
   retroarch-database:
     plugin: dump
+    after: [retroarch-autoconfig]
     source: https://github.com/libretro/libretro-database/archive/master.tar.gz
     source-type : tar
     organize: 
@@ -164,6 +185,7 @@ parts:
      - .config/cheats
   retroarch-info:
     plugin: dump
+    after: [retroarch-database]
     source: https://github.com/libretro/libretro-super/archive/master.tar.gz
     source-type : tar
     organize:
@@ -172,6 +194,7 @@ parts:
      - .config/cores
   retroarch-overlays:
     plugin: dump
+    after: [retroarch-info]
     source: https://github.com/libretro/common-overlays/archive/master.tar.gz
     source-type : tar
     organize:
@@ -180,6 +203,7 @@ parts:
      - .config/overlay
   retroarch-glsl-shaders:
     plugin: dump
+    after: [retroarch-overlays]
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     organize:
@@ -188,9 +212,11 @@ parts:
      - .config/shaders/shaders_glsl
   retroarch-slang-shaders:
     plugin: dump
+    after: [retroarch-glsl-shaders]
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
     organize:
      "*": .config/shaders/shaders_slang
     stage:
      - .config/shaders/shaders_slang
+
