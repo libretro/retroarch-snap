@@ -207,16 +207,15 @@ parts:
     source: https://github.com/libretro/glsl-shaders/archive/master.tar.gz
     source-type : tar
     organize:
-     "*": .config/shaders/shaders_glsl
+     "*": .config/shaders/shaders_glsl/
     stage:
-     - .config/shaders/shaders_glsl
+     - .config/shaders
   retroarch-slang-shaders:
     plugin: dump
     after: [retroarch-glsl-shaders]
     source: https://github.com/libretro/slang-shaders/archive/master.tar.gz
     source-type : tar
     organize:
-     "*": .config/shaders/shaders_slang
+     "*": .config/shaders/shaders_slang/
     stage:
-     - .config/shaders/shaders_slang
-
+     - .config/shaders
