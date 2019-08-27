@@ -22,6 +22,7 @@ apps:
       - removable-media
       - wayland
       - unity7
+      - desktop
 
 parts:
   retroarch:
