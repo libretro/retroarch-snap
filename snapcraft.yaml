@@ -4,6 +4,12 @@ summary: RetroArch
 description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
 grade: stable
+architectures:
+- build-on: i386
+- build-on: amd64
+- build-on: armhf
+- build-on: arm64
+- build-on: ppc64el
 
 apps:
   retroarch:
@@ -30,7 +36,6 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.7.8.3.tar.gz
    after: [desktop-qt5]
-#   build-on: [ amd64, i386, armhf, arm64, ppc64el ]
    make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    configflags:  
      - --enable-kms
