@@ -10,6 +10,15 @@ architectures:
 - build-on: armhf
 - build-on: arm64
 - build-on: ppc64el
+layout:
+  /usr/share/vulkan:
+    symlink: $SNAP/usr/share/vulkan
+
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
+    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
+
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
+    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
 
 apps:
   retroarch:
@@ -225,13 +234,3 @@ parts:
      "*": .config/shaders/shaders_slang/
     stage:
      - .config/shaders
-     
-layout:
-  /usr/share/vulkan:
-    symlink: $SNAP/usr/share/vulkan
-
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
-    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
-
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
-    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
