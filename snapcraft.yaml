@@ -129,10 +129,10 @@ parts:
      - qt5-default
      - libvulkan-dev
      - libsdl2-dev
-#   prime:
-#     - bin/
-#     - lib/
-#     - usr/
+   stage:
+     - bin/
+     - lib/
+     - usr/
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
@@ -225,3 +225,13 @@ parts:
      "*": .config/shaders/shaders_slang/
     stage:
      - .config/shaders
+     
+layout:
+  /usr/share/vulkan:
+    symlink: $SNAP/usr/share/vulkan
+
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
+    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
+
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
+symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
