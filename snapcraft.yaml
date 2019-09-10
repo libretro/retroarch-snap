@@ -29,6 +29,14 @@ apps:
       - wayland
       - unity7
       - desktop
+      passthrough:
+    layout:
+      /usr/share/vulkan:
+        symlink: $SNAP/usr/share/vulkan
+      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
+        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
+      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
+        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
 
 parts:
   retroarch:
@@ -133,14 +141,6 @@ parts:
      - bin/
      - lib/
      - usr/
-  passthrough:
-    layout:
-      /usr/share/vulkan:
-        symlink: $SNAP/usr/share/vulkan
-      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
-        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
-      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
-        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
