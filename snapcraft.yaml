@@ -4,6 +4,7 @@ summary: RetroArch
 description: RetroArch is the official reference frontend for the libretro API.
 confinement: strict
 grade: stable
+base: core18
 architectures:
 - build-on: i386
 - build-on: amd64
