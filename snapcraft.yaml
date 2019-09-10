@@ -29,13 +29,14 @@ apps:
       - wayland
       - unity7
       - desktop
-layout:
-  /usr/share/vulkan:
-    symlink: $SNAP/usr/share/vulkan
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
-    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
-    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
+passthrough:
+  layout:
+    /usr/share/vulkan:
+      symlink: $SNAP/usr/share/vulkan
+    /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
+      symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
+    /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
+      symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
 
 parts:
   retroarch:
