@@ -233,3 +233,4 @@ parts:
      "*": .config/shaders/shaders_slang/
     stage:
      - .config/shaders
+
