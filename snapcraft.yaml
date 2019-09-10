@@ -15,6 +15,13 @@ architectures:
 apps:
   retroarch:
     command: desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
+    layout:
+      /usr/share/vulkan:
+        symlink: $SNAP/usr/share/vulkan
+      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
+        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
+      /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
+        symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
     plugs:
       - network
       - network-bind
@@ -134,13 +141,6 @@ parts:
      - bin/
      - lib/
      - usr/
-   layout:
-     /usr/share/vulkan:
-       symlink: $SNAP/usr/share/vulkan
-     /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so:
-       symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_intel.so
-     /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so:
-       symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libvulkan_radeon.so
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
