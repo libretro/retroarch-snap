@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.7.8.3"
+version: "1.7.8.4"
 title: RetroArch
 summary: RetroArch is the official reference frontend for the libretro API.
 description: |
@@ -53,7 +53,7 @@ parts:
   retroarch:
    plugin: autotools
    source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.7.8.3.tar.gz
+   source: https://github.com/libretro/RetroArch/archive/v1.7.8.4.tar.gz
    after: [desktop-qt5]
    make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    configflags:  
