@@ -40,7 +40,7 @@ apps:
       - opengl
       - home
       - alsa
-      - pulseaudio
+      - audio-playback
       - bluez
       - joystick
       - raw-usb
