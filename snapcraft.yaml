@@ -48,6 +48,7 @@ apps:
       - wayland
       - unity7
       - desktop
+      - screen-inhibit-control
 
 parts:
   retroarch:
