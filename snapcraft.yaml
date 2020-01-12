@@ -93,8 +93,8 @@ parts:
      - libminizip1
      - libopenal1
      - libpulse0
-     - libswresample3
-     - libswscale5
+     - libswresample2
+     - libswscale4
      - libudev1
      - libusb-1.0-0
      - libwayland-client0
