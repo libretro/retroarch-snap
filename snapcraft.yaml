@@ -119,7 +119,7 @@ parts:
      - libvulkan-dev
      - mesa-vulkan-drivers
      - libsdl2-2.0-0
-     - libass5
+     - libass9
      - libfribidi0
      - libsdl1.2debian
      - libsdl-net1.2
