@@ -80,9 +80,9 @@ parts:
      - libnotify-bin
      - fonts-dejavu-core
      - libasound2
-     - libavcodec-ffmpeg56
-     - libavformat-ffmpeg56
-     - libavutil-ffmpeg54
+     - libavcodec57
+     - libavformat57
+     - libavutil55
      - libdrm2
      - libegl1-mesa
      - libfreetype6
