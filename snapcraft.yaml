@@ -56,7 +56,7 @@ parts:
    source-type: tar
    source: https://github.com/libretro/RetroArch/archive/v1.9.1.tar.gz
    after: [desktop-qt5]
-   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
+   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1 HAVE_GIT_VERSION=1" ]
    configflags:  
      - --enable-kms
      - --enable-xvideo
