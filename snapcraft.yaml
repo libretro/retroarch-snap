@@ -55,7 +55,7 @@ parts:
    plugin: autotools
    source-type: tar
 #   source: https://github.com/libretro/RetroArch/archive/v1.9.1.tar.gz
-   source: https://github.com/libretro/RetroArch/archive/refs/heads/master.zip
+   source: https://github.com/libretro/RetroArch.git
    after: [desktop-qt5]
    make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    configflags:  
