@@ -15,11 +15,14 @@ icon: snap/gui/retroarch.svg
 confinement: strict
 grade: stable
 architectures:
-- build-on: i386
 - build-on: amd64
+  run-on: amd64
 - build-on: armhf
+  run-on: armhf
 - build-on: arm64
+  run-on: arm64
 - build-on: ppc64el
+  run-on: ppc64el
 base: core20
 
 layout:
@@ -58,6 +61,7 @@ parts:
    source-type: git
    after: [desktop-qt5]
    source: https://github.com/libretro/RetroArch.git
+   build-environment: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
@@ -77,10 +81,6 @@ parts:
      - --enable-vulkan
      - --disable-discord
      - --enable-dbus
-  retroarch-build:
-   plugin: make
-   after: [desktop-qt5]
-   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
@@ -162,7 +162,7 @@ parts:
   #    - usr/
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch-build]
+    after: [retroarch]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
