@@ -54,14 +54,14 @@ apps:
       - screen-inhibit-control
 
 parts:
-  retroarch-configure:
+  retroarch:
    plugin: autotools
 #   source-type: tar
 #   source: https://github.com/libretro/RetroArch/archive/v1.9.2.tar.gz
    source-type: git
    after: [desktop-qt5]
    source: https://github.com/libretro/RetroArch.git
-   build-environment: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
+   build-environment: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
