@@ -20,7 +20,7 @@ architectures:
 - build-on: armhf
 - build-on: arm64
 - build-on: ppc64el
-base: core18
+base: core20
 
 layout:
   /usr/share/vulkan:
