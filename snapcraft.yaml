@@ -61,7 +61,8 @@ parts:
    source-type: git
    after: [desktop-qt5]
    source: https://github.com/libretro/RetroArch.git
-   build-environment: [ HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1 ]
+   build-environment:
+     - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
