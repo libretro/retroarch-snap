@@ -162,7 +162,7 @@ parts:
   #    - usr/
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch]
+    after: [retroarch-build]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
