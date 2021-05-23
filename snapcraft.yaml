@@ -51,15 +51,14 @@ apps:
       - screen-inhibit-control
 
 parts:
-  retroarch:
+  retroarch_configure:
    plugin: autotools
 #   source-type: tar
 #   source: https://github.com/libretro/RetroArch/archive/v1.9.2.tar.gz
    source-type: git
-   source: https://github.com/libretro/RetroArch.git
    after: [desktop-qt5]
-   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
-   configflags:  
+   source: https://github.com/libretro/RetroArch.git
+   autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
      - --enable-ffmpeg
@@ -78,6 +77,10 @@ parts:
      - --enable-vulkan
      - --disable-discord
      - --enable-dbus
+  retroarch_build:
+   plugin: make
+   after: [desktop-qt5]
+   make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
