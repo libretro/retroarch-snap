@@ -51,7 +51,7 @@ apps:
       - screen-inhibit-control
 
 parts:
-  retroarch_configure:
+  retroarch-configure:
    plugin: autotools
 #   source-type: tar
 #   source: https://github.com/libretro/RetroArch/archive/v1.9.2.tar.gz
@@ -77,7 +77,7 @@ parts:
      - --enable-vulkan
      - --disable-discord
      - --enable-dbus
-  retroarch_build:
+  retroarch-build:
    plugin: make
    after: [desktop-qt5]
    make-parameters: [ "HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1" ]
