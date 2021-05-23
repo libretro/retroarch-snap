@@ -85,9 +85,9 @@ parts:
      - libnotify-bin
      - fonts-dejavu-core
      - libasound2
-     - libavcodec57
-     - libavformat57
-     - libavutil55
+     - libavcodec58
+     - libavformat58
+     - libavutil56
      - libdrm2
      - libegl1-mesa
      - libfreetype6
@@ -98,8 +98,8 @@ parts:
      - libminizip1
      - libopenal1
      - libpulse0
-     - libswresample2
-     - libswscale4
+     - libswresample3
+     - libswscale5
      - libudev1
      - libusb-1.0-0
      - libwayland-client0
