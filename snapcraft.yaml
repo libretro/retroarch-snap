@@ -35,7 +35,9 @@ layout:
 
 apps:
   retroarch:
-    command: desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
+    command-chain: 
+      - desktop-launch
+    command: /usr/local/bin/retroarch.wrapper
     plugs:
       - network
       - network-bind
