@@ -112,7 +112,6 @@ parts:
      - libxkbcommon0
      - libxv1
      - libxxf86vm1
-     - pulseaudio
      - zlib1g
      - qt5-default
      - libqt5waylandclient5
