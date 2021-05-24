@@ -148,6 +148,7 @@ parts:
      - libswscale-dev
      - libusb-1.0-0-dev
      - libudev-dev
+     - libx11-xcb-dev
      - libxml2-dev
      - libxv-dev
      - mesa-common-dev
