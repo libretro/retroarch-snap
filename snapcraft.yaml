@@ -85,6 +85,7 @@ parts:
    stage-packages:
      - libnotify-bin
      - fonts-dejavu-core
+     - freeglut3-dev
      - libasound2
      - libavcodec58
      - libavformat58
@@ -96,6 +97,7 @@ parts:
      - libgl1-mesa-dri
      - libgl1-mesa-glx
      - libgles2-mesa
+     - libgtk2.0-0
      - libminizip1
      - libopenal1
      - libpulse0
