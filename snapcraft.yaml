@@ -35,8 +35,6 @@ layout:
 
 apps:
   retroarch:
-    command-chain: 
-      - desktop-launch
     command: usr/local/bin/retroarch.wrapper
     plugs:
       - network
