@@ -35,9 +35,9 @@ layout:
 
 apps:
   retroarch:
-    command: usr/local/bin/retroarch.wrapper
+    command: desktop-lauch $SNAP/usr/local/bin/retroarch.wrapper
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg
     plugs:
       - network
       - network-bind
