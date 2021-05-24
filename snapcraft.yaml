@@ -36,6 +36,8 @@ layout:
 apps:
   retroarch:
     command: usr/local/bin/retroarch.wrapper
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
       - network
       - network-bind
@@ -63,7 +65,6 @@ parts:
    source: https://github.com/libretro/RetroArch.git
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
-     - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
