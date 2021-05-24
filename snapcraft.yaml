@@ -37,7 +37,7 @@ apps:
   retroarch:
     command-chain: 
       - desktop-launch
-    command: /usr/local/bin/retroarch.wrapper
+    command: usr/local/bin/retroarch.wrapper
     plugs:
       - network
       - network-bind
