@@ -133,6 +133,7 @@ parts:
      - libsdl-net1.2
      - libbluetooth3
      - libxi6
+     - libaio1
    build-packages:
      - gcc
      - make
