@@ -111,6 +111,8 @@ parts:
      - libwayland-client0
      - libwayland-egl1-mesa
      - libx11-6
+     - libx11-dev
+     - libxrandr-dev
      - libxext6
      - libxinerama1
      - libxkbcommon0
