@@ -73,7 +73,7 @@ parts:
      - --enable-ffmpeg
      - --enable-ssa 
      - --disable-coreaudio
-     - --disable-jack
+     - --enable-jack
      - --enable-pulse
      - --disable-roar
      - --disable-rsound
@@ -151,6 +151,7 @@ parts:
      - libfreetype6-dev 
      - libgbm-dev
      - libgl1-mesa-dev
+     - libjack-jackd2-dev
      - libpulse-dev
      - libswscale-dev
      - libusb-1.0-0-dev
