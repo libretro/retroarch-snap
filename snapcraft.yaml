@@ -101,6 +101,7 @@ parts:
      - libgl1-mesa-dri
      - libgl1-mesa-glx
      - libgles2-mesa
+     - libjack-jackd2-0
      - libminizip1
      - libopenal1
      - libpulse0
