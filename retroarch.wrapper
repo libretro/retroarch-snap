@@ -37,5 +37,10 @@ set -e
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $HOME/../../../" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
+# As discussed here:
+#  - https://forum.snapcraft.io/t/egl-using-snaps-on-impish-seem-to-be-broken-when-using-the-nvidia-proprietary-driver/25715
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH#$SNAP_LIBRARY_PATH:}"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${SNAP_LIBRARY_PATH}"
+
 exec $SNAP/usr/local/bin/retroarch "$@"
 
