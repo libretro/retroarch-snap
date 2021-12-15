@@ -180,7 +180,8 @@ parts:
     organize:
      "*.dsp": .config/filters/audio/
      "*.so": .config/filters/audio/
-#    stage: .config/filters
+    stage:
+     - .config/filters
   retroarch-video-filters:
     plugin: autotools
     after: [retroarch-audio-filters]
@@ -190,7 +191,8 @@ parts:
     organize:
      "*.so": .config/filters/video/
      "*.filt": .config/filters/video/
-#    stage: .config/filters
+    stage:
+     - .config/filters
   retroarch-wrapper:
     plugin: dump
     after: [retroarch-video-filters]
