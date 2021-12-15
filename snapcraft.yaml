@@ -177,6 +177,7 @@ parts:
     source: https://github.com/libretro/RetroArch.git
     source-subdir: libretro-common/audio/dsp_filters/
     source-type : git
+    override-build: make
     organize:
      "*.dsp": .config/filters/audio/
      "*.so": .config/filters/audio/
@@ -188,6 +189,7 @@ parts:
     source: https://github.com/libretro/RetroArch.git
     source-subdir: gfx/video_filters/
     source-type : git
+    override-build: make
     organize:
      "*.so": .config/filters/video/
      "*.filt": .config/filters/video/
