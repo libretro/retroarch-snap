@@ -175,24 +175,22 @@ parts:
     plugin: autotools
     after: [retroarch]
     source: https://github.com/libretro/RetroArch.git
-    source-subdir: libretro-common/audio/dsp_filters/
     source-type : git
-    override-build: ./configure && make
+    override-build: cd libretro-common/audio/dsp_filters && ./configure && make
     organize:
-     "*.dsp": .config/filters/audio/
-     "*.so": .config/filters/audio/
+     "libretro-common/audio/dsp_filters/*.dsp": .config/filters/audio/
+     "libretro-common/audio/dsp_filters/*.so": .config/filters/audio/
     stage:
      - .config/filters
   retroarch-video-filters:
     plugin: autotools
     after: [retroarch-audio-filters]
     source: https://github.com/libretro/RetroArch.git
-    source-subdir: gfx/video_filters/
     source-type : git
-    override-build: ./configure && make
+    override-build: cd gfx/video_filters && ./configure && make
     organize:
-     "*.so": .config/filters/video/
-     "*.filt": .config/filters/video/
+     "gfx/video_filters/*.so": .config/filters/video/
+     "gfx/video_filters/*.filt": .config/filters/video/
     stage:
      - .config/filters
   retroarch-wrapper:
