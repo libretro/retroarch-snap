@@ -174,7 +174,9 @@ parts:
   retroarch-audio-filters:
     plugin: autotools
     after: [retroarch]
-    source: ./libretro-common/audio/dsp_filters/
+    source: https://github.com/libretro/RetroArch.git
+    source-subdir: libretro-common/audio/dsp_filters/
+    source-type : git
     organize:
      "*.dsp": .config/filters/audio/
      "*.so": .config/filters/audio/
@@ -182,7 +184,9 @@ parts:
   retroarch-video-filters:
     plugin: autotools
     after: [retroarch-audio-filters]
-    source: ./gfx/video_filters/
+    source: https://github.com/libretro/RetroArch.git
+    source-subdir: gfx/video_filters/
+    source-type : git
     organize:
      "*.so": .config/filters/video/
      "*.filt": .config/filters/video/
