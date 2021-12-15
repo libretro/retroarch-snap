@@ -180,8 +180,6 @@ parts:
     organize:
      "libretro-common/audio/dsp_filters/*.dsp": .config/filters/audio/
      "libretro-common/audio/dsp_filters/*.so": .config/filters/audio/
-    stage:
-     - .config/filters
   retroarch-video-filters:
     plugin: autotools
     after: [retroarch-audio-filters]
@@ -191,8 +189,6 @@ parts:
     organize:
      "gfx/video_filters/*.so": .config/filters/video/
      "gfx/video_filters/*.filt": .config/filters/video/
-    stage:
-     - .config/filters
   retroarch-wrapper:
     plugin: dump
     after: [retroarch-video-filters]
