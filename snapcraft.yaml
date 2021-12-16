@@ -171,27 +171,23 @@ parts:
   #    - bin/
   #    - lib/
   #    - usr/
-  retroarch-audio-filters:
-    plugin: autotools
+  retroarch-filters:
     after: [retroarch]
-    source: https://github.com/libretro/RetroArch.git
-    source-type : git
-    override-build: cd libretro-common/audio/dsp_filters && ./configure && make
-    organize:
-     "libretro-common/audio/dsp_filters/*.dsp": .config/filters/audio/
-     "libretro-common/audio/dsp_filters/*.so": .config/filters/audio/
-  retroarch-video-filters:
     plugin: autotools
-    after: [retroarch-audio-filters]
-    source: https://github.com/libretro/RetroArch.git
-    source-type : git
-    override-build: cd gfx/video_filters && ./configure && make
-    organize:
-     "gfx/video_filters/*.so": .config/filters/video/
-     "gfx/video_filters/*.filt": .config/filters/video/
+    source-type: tar
+    source: https://github.com/libretro/RetroArch/archive/master.tar.gz
+    override-build: |
+    cd libretro-common/audio/dsp_filters && ./configure && make
+    mkdir -p $SNAP_USER_COMMON/.config/retroarch/filters/audio
+    cp *.dsp $SNAP_USER_COMMON/.config/retroarch/filters/audio
+    cp *.so $SNAP_USER_COMMON/.config/retroarch/filters/audio
+    cd ../../../gfx/video_filters && ./configure && make
+    mkdir -p $SNAP_USER_COMMON/.config/retroarch/filters/video
+    cp *.filt $SNAP_USER_COMMON/.config/retroarch/filters/video
+    cp *.so $SNAP_USER_COMMON/.config/retroarch/filters/video
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch-video-filters]
+    after: [retroarch-filters]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
