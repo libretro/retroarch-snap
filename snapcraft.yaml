@@ -172,10 +172,9 @@ parts:
      - libvulkan-dev
      - libsdl2-dev
      - libdbus-1-dev
-  #  stage:
-  #    - bin/
-  #    - lib/
-  #    - usr/
+    stage:
+     - .config/filters/video
+     - .config/filters/audio
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
