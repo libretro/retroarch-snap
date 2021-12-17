@@ -67,6 +67,11 @@ parts:
    source: https://github.com/libretro/RetroArch.git
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
+   override-build: |
+    cd libretro-common/audio/dsp_filters/ && ./configure && make INSTALLDIR=$SNAP/.config/filters/audio && make install
+    cd ../../../gfx/video_filters/ && ./configure && make INSTALLDIR=$SNAP/.config/filters/video && make install
+    cd ../../
+    snapcraftctl build
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
@@ -171,24 +176,9 @@ parts:
   #    - bin/
   #    - lib/
   #    - usr/
-  retroarch-filters:
-    after: [retroarch]
-    plugin: autotools
-    source-type: tar
-    source: https://github.com/libretro/RetroArch/archive/master.tar.gz
-    override-build: |
-      cd libretro-common/audio/dsp_filters && ./configure && make
-      mkdir -p $SNAP_USER_COMMON/.config/retroarch/filters/audio
-      cp *.dsp $SNAP_USER_COMMON/.config/retroarch/filters/audio
-      cp *.so $SNAP_USER_COMMON/.config/retroarch/filters/audio
-      cd ../../../gfx/video_filters && ./configure && make
-      mkdir -p $SNAP_USER_COMMON/.config/retroarch/filters/video
-      cp *.filt $SNAP_USER_COMMON/.config/retroarch/filters/video
-      cp *.so $SNAP_USER_COMMON/.config/retroarch/filters/video
-    prime: $SNAP_USER_COMMON/.config/retroarch/filters/
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch-filters]
+    after: [retroarch]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
