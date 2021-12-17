@@ -172,7 +172,7 @@ parts:
      - libvulkan-dev
      - libsdl2-dev
      - libdbus-1-dev
-    stage:
+   stage:
      - .config/filters/video
      - .config/filters/audio
   retroarch-wrapper:
