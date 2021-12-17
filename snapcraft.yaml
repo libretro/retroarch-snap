@@ -185,6 +185,7 @@ parts:
       mkdir -p $SNAP_USER_COMMON/.config/retroarch/filters/video
       cp *.filt $SNAP_USER_COMMON/.config/retroarch/filters/video
       cp *.so $SNAP_USER_COMMON/.config/retroarch/filters/video
+    prime: $SNAP_USER_COMMON/.config/retroarch/filters/
   retroarch-wrapper:
     plugin: dump
     after: [retroarch-filters]
