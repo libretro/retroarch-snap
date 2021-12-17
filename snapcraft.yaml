@@ -68,8 +68,8 @@ parts:
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
    override-build: |
-    cd libretro-common/audio/dsp_filters/ && ./configure && make DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR= && make install
-    cd ../../../gfx/video_filters/ && ./configure && make DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/video INSTALLDIR= && make install
+    cd libretro-common/audio/dsp_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR=
+    cd ../../../gfx/video_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/video INSTALLDIR=
     cd ../../
     snapcraftctl build
    autotools-configure-parameters:  
