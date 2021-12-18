@@ -67,11 +67,6 @@ parts:
    source: https://github.com/libretro/RetroArch.git
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
-   override-build: |
-    cd libretro-common/audio/dsp_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR=
-    cd ../../../gfx/video_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/video INSTALLDIR=
-    cd ../../
-    snapcraftctl build
    autotools-configure-parameters:  
      - --enable-kms
      - --enable-xvideo
@@ -172,16 +167,20 @@ parts:
      - libvulkan-dev
      - libsdl2-dev
      - libdbus-1-dev
-   stage:
-     - .config/filters/video
-     - .config/filters/audio
-     - usr/local/bin
-     - usr/lib
-     - usr/local/share
-     - etc/retroarch.cfg
+  retroarch-filters:
+    plugin: autotools
+    after: [retroarch]
+    source: https://github.com/libretro/RetroArch.git
+    source-type: git
+    override-build: |
+     cd libretro-common/audio/dsp_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR=
+     cd ../../../gfx/video_filters/ && ./configure && make && make install DESTDIR=$SNAPCRAFT_PART_INSTALL/.config/filters/video INSTALLDIR=
+    stage:
+      - .config/filters/video
+      - .config/filters/audio
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch]
+    after: [retroarch-filters]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
