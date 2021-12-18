@@ -6,39 +6,39 @@
 set -e
 
 #Notify the user that it might take a while to copy everything
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #Create RetroArch user configuration directory if doesn't exist
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch" ] && mkdir -p "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir -p "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy assets if doesn't exist
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/assets" ] && cp -R "$SNAP/.config/assets" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/assets" ] && cp -R "$SNAP/.config/assets" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy joypad autoconfig files if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/autoconfig" ] && cp -R "$SNAP/.config/autoconfig" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/autoconfig" ] && cp -R "$SNAP/.config/autoconfig" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy cheats files if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/cheats" ] && cp -R "$SNAP/.config/cheats" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/cheats" ] && cp -R "$SNAP/.config/cheats" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy database files if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/database" ] && cp -R "$SNAP/.config/database" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/database" ] && cp -R "$SNAP/.config/database" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy info files if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/cores" ] && cp -R "$SNAP/.config/cores" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/cores" ] && cp -R "$SNAP/.config/cores" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy overlay if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/overlay" ] && cp -R "$SNAP/.config/overlay" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/overlay" ] && cp -R "$SNAP/.config/overlay" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy shaders if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
 #Copy filters if doesn't exist 
-[ ! -d "$SNAP_USER_COMMON/.config/retroarch/filters" ] && cp -R "$SNAP/.config/filters" "$SNAP_USER_COMMON/.config/retroarch"
+[ ! -d "$SNAP_USER_DATA/.config/retroarch/filters" ] && cp -R "$SNAP/.config/filters" "$SNAP_USER_DATA/.config/retroarch"
 
-[ ! -f "$SNAP_USER_COMMON/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
-[ ! -f "$SNAP_USER_COMMON/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_COMMON/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$SNAP_USER_COMMON/.config/retroarch/retroarch.cfg"
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
 # As discussed here:
 #  - https://forum.snapcraft.io/t/egl-using-snaps-on-impish-seem-to-be-broken-when-using-the-nvidia-proprietary-driver/25715
