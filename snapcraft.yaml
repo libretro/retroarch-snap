@@ -172,7 +172,7 @@ parts:
      - libvulkan-dev
      - libsdl2-dev
      - libdbus-1-dev
-   stage:
+   prime:
      - .config/filters/video
      - .config/filters/audio
      - usr/local/bin
