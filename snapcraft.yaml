@@ -175,6 +175,7 @@ parts:
    stage:
      - .config/filters/video
      - .config/filters/audio
+     - usr/local/bin
   retroarch-wrapper:
     plugin: dump
     after: [retroarch]
