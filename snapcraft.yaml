@@ -176,7 +176,7 @@ parts:
      - .config/filters/video
      - .config/filters/audio
      - usr/local/bin
-     - usr/local/lib
+     - usr/lib
      - usr/local/share
      - etc/retroarch.cfg
   retroarch-wrapper:
