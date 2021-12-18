@@ -32,6 +32,9 @@ set -e
 #Copy shaders if doesn't exist 
 [ ! -d "$SNAP_USER_COMMON/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_COMMON/.config/retroarch"
 
+#Copy filters if doesn't exist 
+[ ! -d "$SNAP_USER_COMMON/.config/retroarch/filters" ] && cp -R "$SNAP/.config/filters" "$SNAP_USER_COMMON/.config/retroarch"
+
 [ ! -f "$SNAP_USER_COMMON/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
