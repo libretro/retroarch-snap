@@ -59,12 +59,18 @@ apps:
 
 parts:
   snapcraft-preload:
-    source: https://github.com/sergiusens/snapcraft-preload.git
-    plugin: cmake
     build-packages:
-      - on amd64:
-        - gcc-multilib
-        - g++-multilib
+    - on amd64:
+      - gcc-multilib
+      - g++-multilib
+    plugin: cmake
+    source: https://github.com/sergiusens/snapcraft-preload.git
+  preload:
+    after:
+    - snapcraft-preload
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      ln -sv snapcraft-preload $SNAPCRAFT_PART_INSTALL/bin/preload
   retroarch:
    plugin: autotools
 #   source-type: tar
@@ -286,6 +292,8 @@ parts:
   #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   # 
   desktop-qt5:
+    after: 
+     - preload
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
