@@ -37,7 +37,7 @@ layout:
 
 apps:
   retroarch:
-    command: desktop-launch snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    command: bin/desktop-launch bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg
     plugs:
@@ -65,9 +65,6 @@ parts:
       - on amd64:
         - gcc-multilib
         - g++-multilib
-    stage-packages:
-      - to amd64:
-        - lib32stdc++6
   retroarch:
    plugin: autotools
 #   source-type: tar
