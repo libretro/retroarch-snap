@@ -65,6 +65,13 @@ parts:
       - on amd64:
         - gcc-multilib
         - g++-multilib
+  # We keep the 'preload' part to be backward compatible
+  preload:
+    plugin: nil
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      ln -sv snapcraft-preload $SNAPCRAFT_PART_INSTALL/bin/preload
+    after: [snapcraft-preload]
   retroarch:
    plugin: autotools
 #   source-type: tar
@@ -286,8 +293,7 @@ parts:
   #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   # 
   desktop-qt5:
-    after: 
-     - snapcraft-preload
+    after: [snapcraft-preload]
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
