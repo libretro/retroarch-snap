@@ -37,7 +37,7 @@ layout:
 
 apps:
   retroarch:
-    command: bin/desktop-launch bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    command: desktop-launch snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg
     plugs:
@@ -59,18 +59,15 @@ apps:
 
 parts:
   snapcraft-preload:
-    build-packages:
-    - on amd64:
-      - gcc-multilib
-      - g++-multilib
-    plugin: cmake
     source: https://github.com/sergiusens/snapcraft-preload.git
-  preload:
-    after:
-    - snapcraft-preload
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
-      ln -sv snapcraft-preload $SNAPCRAFT_PART_INSTALL/bin/preload
+    plugin: cmake
+    build-packages:
+      - on amd64:
+        - gcc-multilib
+        - g++-multilib
+    stage-packages:
+      - to amd64:
+        - lib32stdc++6
   retroarch:
    plugin: autotools
 #   source-type: tar
@@ -293,7 +290,7 @@ parts:
   # 
   desktop-qt5:
     after: 
-     - preload
+     - snapcraft-preload
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
