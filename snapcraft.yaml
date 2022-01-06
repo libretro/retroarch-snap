@@ -37,7 +37,7 @@ layout:
 
 apps:
   retroarch:
-    command: bin/desktop-launch bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    command: bin/desktop-launch $SNAP/usr/local/bin/retroarch.wrapper
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg
     plugs:
@@ -58,20 +58,6 @@ apps:
       - screen-inhibit-control
 
 parts:
-  snapcraft-preload:
-    source: https://github.com/sergiusens/snapcraft-preload.git
-    plugin: cmake
-    build-packages:
-      - on amd64:
-        - gcc-multilib
-        - g++-multilib
-  # We keep the 'preload' part to be backward compatible
-  preload:
-    plugin: nil
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
-      ln -sv snapcraft-preload $SNAPCRAFT_PART_INSTALL/bin/preload
-    after: [snapcraft-preload]
   retroarch:
    plugin: autotools
 #   source-type: tar
@@ -293,7 +279,6 @@ parts:
   #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   # 
   desktop-qt5:
-    after: [snapcraft-preload]
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
