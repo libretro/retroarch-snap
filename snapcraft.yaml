@@ -59,11 +59,11 @@ apps:
 
 parts:
   snapcraft-preload:
-    source: https://github.com/sergiusens/snapcraft-preload.git 1
+    source: https://github.com/sergiusens/snapcraft-preload.git
     plugin: cmake
     organize:
-      “usr/local/bin/": bin/
-      "usr/local/lib/”: lib/
+      usr/local/bin/: bin/
+      usr/local/lib/: lib/
     build-packages:
       - on amd64:
         - gcc-multilib
