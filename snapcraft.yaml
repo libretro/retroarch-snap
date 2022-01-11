@@ -61,13 +61,14 @@ parts:
   snapcraft-preload:
     source: https://github.com/sergiusens/snapcraft-preload.git
     plugin: cmake
-    organize:
-      usr/local/bin/: bin/
-      usr/local/lib/: lib/
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
     build-packages:
       - on amd64:
         - gcc-multilib
         - g++-multilib
+    stage-packages:
+      - lib32stdc++6
   retroarch:
    plugin: autotools
 #   source-type: tar
