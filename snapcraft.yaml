@@ -71,9 +71,10 @@ parts:
     stage-packages:
       - on amd64:
         - lib32stdc++6
-    override-prime: |
-      ln -s /usr/lib/libsnapcraft-preload* /lib/
-      snapcraftctl prime
+    organize:
+      usr/local/*: /
+    prime:
+      - -usr
   retroarch:
    plugin: autotools
 #   source-type: tar
