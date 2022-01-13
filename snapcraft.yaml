@@ -72,7 +72,7 @@ parts:
       - on amd64:
         - lib32stdc++6
     override-prime: |
-      ln -s $SNAP/usr/lib/libsnapcraft-preload* $SNAP/lib/
+      ln -s /usr/lib/libsnapcraft-preload* /lib/
       snapcraftctl prime
   retroarch:
    plugin: autotools
