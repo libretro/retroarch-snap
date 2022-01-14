@@ -45,6 +45,8 @@ set -e
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH#$SNAP_LIBRARY_PATH:}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${SNAP_LIBRARY_PATH}"
 
+export LD_PRELOAD=$SNAP/usr/lib/snapcraft-preload.so
+
 # As discussed here:
 #  - https://forum.snapcraft.io/t/correct-way-to-do-nvidia-vulkan/20361/2
 # Export the Vulkan ICD filename paths to fix Vulkan on Nvidia proprietary driver
