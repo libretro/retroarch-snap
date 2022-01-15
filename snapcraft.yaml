@@ -40,6 +40,7 @@ apps:
     command: bin/desktop-launch $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg
+      LD_PRELOAD: $LD_PRELOAD:$SNAP/usr/lib
     plugs:
       - network
       - network-bind
@@ -62,7 +63,7 @@ parts:
     source: https://github.com/sergiusens/snapcraft-preload.git
     plugin: cmake
     cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_INSTALL_PREFIX=/usr -DLIBPATH=/lib
     build-packages:
       - on amd64:
         - gcc-multilib
