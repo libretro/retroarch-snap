@@ -57,8 +57,9 @@ apps:
       - desktop
       - screen-inhibit-control
   daemon:
-    command: daemon-start.sh $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    command: $SNAP/usr/local/bin/daemon-start.sh $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
     daemon: simple
+    restart-condition: always
 
 parts:
   snapcraft-preload:
@@ -199,8 +200,10 @@ parts:
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
+     daemon-start.sh: usr/local/bin/daemon-start.sh
     stage:
     - usr/local/bin/retroarch.wrapper
+    - usr/local/bin/daemon-start.sh
   retroarch-assets:
     plugin: dump
     after: [retroarch-wrapper]
