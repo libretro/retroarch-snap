@@ -57,7 +57,7 @@ apps:
       - desktop
       - screen-inhibit-control
   daemon:
-    command: $SNAP/usr/local/bin/daemon-start.sh $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    command: $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/daemon-start.sh $SNAP/usr/local/bin/retroarch.wrapper
     daemon: simple
     restart-condition: always
 
@@ -79,7 +79,7 @@ parts:
 #   source-type: tar
 #   source: https://github.com/libretro/RetroArch/archive/v1.9.2.tar.gz
    source-type: git
-   after: [desktop-qt5]
+   after: [retroarch-wrapper]
    source: https://github.com/libretro/RetroArch.git
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
@@ -196,7 +196,7 @@ parts:
       - .config/filters/audio
   retroarch-wrapper:
     plugin: dump
-    after: [retroarch-filters]
+    after: [desktop-qt5]
     source: .
     organize:
      retroarch.wrapper: usr/local/bin/retroarch.wrapper
