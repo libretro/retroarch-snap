@@ -56,6 +56,9 @@ apps:
       - unity7
       - desktop
       - screen-inhibit-control
+  daemon:
+    command: daemon-start.sh $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/retroarch.wrapper
+    daemon: simple
 
 parts:
   snapcraft-preload:
