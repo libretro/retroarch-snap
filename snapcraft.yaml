@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.9.14"
+version: "1.10"
 title: RetroArch
 summary: RetroArch is the official reference frontend for the libretro API.
 description: |
