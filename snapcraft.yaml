@@ -209,6 +209,9 @@ parts:
      - libvulkan-dev
      - libxxf86vm-dev
      - libdbus-1-dev
+   override-build: |
+     snapcraftctl build
+     ln -sf ../usr/lib/libsnapcraft-preload.so $SNAPCRAFT_PART_INSTALL/lib/libsnapcraft-preload.so    
   retroarch-filters:
     plugin: autotools
     after: [retroarch]
