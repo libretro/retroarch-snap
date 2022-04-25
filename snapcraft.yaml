@@ -126,7 +126,7 @@ parts:
      - --disable-xinerama
      - --enable-qt
      - --enable-vulkan
-     - --disable-discord
+     - --enable-discord
      - --enable-dbus
    stage-packages:
      - libnotify-bin
