@@ -57,6 +57,9 @@ apps:
       - desktop
       - desktop-legacy
       - screen-inhibit-control
+      - browser-support
+      - hardware-observe
+      - mount-observe
 #  daemon:
 #    command: $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/daemon-start.sh $SNAP/usr/local/bin/retroarch.wrapper
 #    environment:
