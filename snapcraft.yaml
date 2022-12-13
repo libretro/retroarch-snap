@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.13.0"
+version: "1.14.0"
 title: RetroArch
 summary: RetroArch is the official reference frontend for the libretro API.
 description: |
@@ -106,10 +106,10 @@ parts:
 #      - usr/local/bin/daemon-start.sh
   retroarch:
    plugin: autotools
-   source-type: tar
-   source: https://github.com/libretro/RetroArch/archive/v1.13.0.tar.gz
-#   source-type: git
-#   source: https://github.com/libretro/RetroArch.git
+#   source-type: tar
+#   source: https://github.com/libretro/RetroArch/archive/v1.13.0.tar.gz
+   source-type: git
+   source: https://github.com/libretro/RetroArch.git
    after: [sdl2,libdecor,retroarch-wrapper]
    build-environment:
      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
