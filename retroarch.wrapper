@@ -39,7 +39,7 @@ set -e
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
 
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
-[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "input_joypad_driver = sdl2" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
 
 # As discussed here:
 #  - https://forum.snapcraft.io/t/egl-using-snaps-on-impish-seem-to-be-broken-when-using-the-nvidia-proprietary-driver/25715
