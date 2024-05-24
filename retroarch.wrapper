@@ -1,12 +1,22 @@
 #!/bin/sh
 
-#Notify user that we're working so they don't think anything is broken
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Preparing the environment..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
-
 set -e
 
+MAINCONFIG="$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+
+_notify() {
+   local msg=$1
+   local timeout=2000
+   local icon="$SNAP/.config/assets/xmb/monochrome/png/retroarch.png"
+
+   notify-send "RetroArch" "${msg}" -i ${icon} -t $timeout
+}
+
+#Notify user that we're working so they don't think anything is broken
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Preparing the environment..."
+
 #Notify the user that it might take a while to copy everything
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && notify-send "RetroArch" "Copying necessary files (this could take a minute)..." -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
+[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Copying necessary files (this could take a minute)..."
 
 #Create RetroArch user configuration directory if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config" ] && mkdir "$SNAP_USER_DATA/.config"
@@ -15,53 +25,30 @@ set -e
 #Copy assets if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/assets" ] && cp -R "$SNAP/.config/assets" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy joypad autoconfig files if doesn't exist 
+#Copy joypad autoconfig files if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/autoconfig" ] && cp -R "$SNAP/.config/autoconfig" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy cheats files if doesn't exist 
+#Copy cheats files if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/cheats" ] && cp -R "$SNAP/.config/cheats" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy database files if doesn't exist 
+#Copy database files if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/database" ] && cp -R "$SNAP/.config/database" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy info files if doesn't exist 
+#Copy info files if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/cores" ] && cp -R "$SNAP/.config/cores" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy overlay if doesn't exist 
+#Copy overlay if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/overlay" ] && cp -R "$SNAP/.config/overlay" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy shaders if doesn't exist 
+#Copy shaders if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy filters if doesn't exist 
+#Copy filters if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config/retroarch/filters" ] && cp -R "$SNAP/.config/filters" "$SNAP_USER_DATA/.config/retroarch"
 
-[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && notify-send "RetroArch" "Done!" -i "$SNAP/.config/assets/xmb/monochrome/png/retroarch.png" -t 2000
+[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && _notify "Done!"
 
 #If the config file doesn't exist, create it and point the browser directory outside of the snap package
-[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && touch "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" && echo "input_joypad_driver = sdl2" >> "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+[ ! -f "$MAINCONFIG" ] && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$MAINCONFIG" && echo "input_joypad_driver = sdl2" >> "$MAINCONFIG"
 
-# As discussed here:
-#  - https://forum.snapcraft.io/t/egl-using-snaps-on-impish-seem-to-be-broken-when-using-the-nvidia-proprietary-driver/25715
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH#$SNAP_LIBRARY_PATH:}"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${SNAP_LIBRARY_PATH}"
-
-export SNAPCRAFT_PRELOAD=$SNAP
-export LD_PRELOAD=$SNAP/usr/lib/libsnapcraft-preload.so
-
-# As discussed here:
-#  - https://forum.snapcraft.io/t/correct-way-to-do-nvidia-vulkan/20361/2
-# Export the Vulkan ICD filename paths to fix Vulkan on Nvidia proprietary driver
-#  - There is no Intel ICD for ARM
-if [ "$SNAP_ARCH" = "amd64" ]; then
-  export VK_ICD_FILENAMES="/var/lib/snapd/lib/vulkan/icd.d/nvidia_icd.json:$SNAP/usr/share/vulkan/icd.d/radeon.x86_64.json:$SNAP/usr/share/vulkan/icd.d/intel_icd.x86_64.json"
-elif [ "$SNAP_ARCH" = "i386" ]; then
-  export VK_ICD_FILENAMES="/var/lib/snapd/lib/vulkan/icd.d/nvidia_icd.json:$SNAP/usr/share/vulkan/icd.d/radeon.i686.json:$SNAP/usr/share/vulkan/icd.d/intel_icd.i686.json"
-elif [ "$SNAP_ARCH" = "armhf" ]; then
-  export VK_ICD_FILENAMES="/var/lib/snapd/lib/vulkan/icd.d/nvidia_icd.json:$SNAP/usr/share/vulkan/icd.d/radeon.armv7l.json"
-elif [ "$SNAP_ARCH" = "arm64" ]; then
-  export VK_ICD_FILENAMES="/var/lib/snapd/lib/vulkan/icd.d/nvidia_icd.json:$SNAP/usr/share/vulkan/icd.d/radeon.aarch64.json"
-fi
-
-exec $SNAP/usr/local/bin/retroarch "$@"
-
+exec "$@"
