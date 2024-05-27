@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 MAINCONFIG="$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+FILESETS=('assets' 'autoconfig' 'cheats' 'cores' 'database' 'filters' 'overlay' 'shaders')
 
 _notify() {
    local msg=$1
@@ -22,29 +23,14 @@ _notify() {
 [ ! -d "$SNAP_USER_DATA/.config" ] && mkdir "$SNAP_USER_DATA/.config"
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy assets if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/assets" ] && cp -R "$SNAP/.config/assets" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy joypad autoconfig files if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/autoconfig" ] && cp -R "$SNAP/.config/autoconfig" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy cheats files if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/cheats" ] && cp -R "$SNAP/.config/cheats" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy database files if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/database" ] && cp -R "$SNAP/.config/database" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy info files if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/cores" ] && cp -R "$SNAP/.config/cores" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy overlay if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/overlay" ] && cp -R "$SNAP/.config/overlay" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy shaders if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/shaders" ] && cp -R "$SNAP/.config/shaders" "$SNAP_USER_DATA/.config/retroarch"
-
-#Copy filters if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config/retroarch/filters" ] && cp -R "$SNAP/.config/filters" "$SNAP_USER_DATA/.config/retroarch"
+#Copy filesets if doesn't exist
+for fileset in ${FILESETS[@]};
+do
+   if [ ! -d "$SNAP_USER_DATA/.config/retroarch/$fileset" ];
+   then
+      cp -R "$SNAP/.config/$fileset" "$SNAP_USER_DATA/.config/retroarch"
+   fi
+done
 
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && _notify "Done!"
 
