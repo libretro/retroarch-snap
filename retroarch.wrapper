@@ -13,17 +13,17 @@ _notify() {
    notify-send "RetroArch" "${msg}" -i ${icon} -t $timeout
 }
 
-#Notify user that we're working so they don't think anything is broken
+# Notify user that we're working so they don't think anything is broken
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Preparing the environment..."
 
-#Notify the user that it might take a while to copy everything
+# Notify the user that it might take a while to copy everything
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Copying necessary files (this could take a minute)..."
 
-#Create RetroArch user configuration directory if doesn't exist
+# Create RetroArch user configuration directory if doesn't exist
 [ ! -d "$SNAP_USER_DATA/.config" ] && mkdir "$SNAP_USER_DATA/.config"
 [ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir "$SNAP_USER_DATA/.config/retroarch"
 
-#Copy filesets if doesn't exist
+# Copy filesets if doesn't exist
 for fileset in ${FILESETS[@]};
 do
    if [ ! -d "$SNAP_USER_DATA/.config/retroarch/$fileset" ];
@@ -34,7 +34,17 @@ done
 
 [ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && _notify "Done!"
 
-#If the config file doesn't exist, create it and point the browser directory outside of the snap package
+# If the config file doesn't exist, create it and point the browser directory outside of the snap package
 [ ! -f "$MAINCONFIG" ] && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$MAINCONFIG" && echo "input_joypad_driver = sdl2" >> "$MAINCONFIG"
+
+# Make PulseAudio socket available inside the snap-specific $XDG_RUNTIME_DIR
+if [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/../pulse/native" ];
+then
+   export PULSE_SERVER="unix:$XDG_RUNTIME_DIR/../pulse/native"
+fi
+
+# Override to layout for X11
+export QTCOMPOSE=/usr/share/X11/locale
+export XLOCALEDIR=/usr/share/X11/locale
 
 exec "$@"
