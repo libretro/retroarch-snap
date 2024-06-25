@@ -10,7 +10,7 @@ _notify() {
    local timeout=2000
    local icon="$SNAP/.config/assets/xmb/monochrome/png/retroarch.png"
 
-   notify-send "RetroArch" "${msg}" -i ${icon} -t $timeout
+   notify-send "RetroArch" "${msg}" -i ${icon} -t $timeout || printf "[INFO] [Wrapper]: ${msg}\n"
 }
 
 # Notify user that we're working so they don't think anything is broken
