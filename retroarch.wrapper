@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export SNAPCRAFT_PRELOAD=$SNAP
+export LD_PRELOAD=$SNAP/usr/lib/libsnapcraft-preload.so
+
 set -e
 
 MAINCONFIG="$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
