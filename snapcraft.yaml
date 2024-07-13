@@ -30,6 +30,8 @@ plugs:
     interface: content
     target: $SNAP/graphics
     default-provider: mesa-core22
+  shared-memory:  # Required by some cores such as dolphin-libretro and swanstation-libretro
+    private: true
 
 layout:
   /usr/share/libdrm:
@@ -48,7 +50,6 @@ apps:
     command-chain:
     - bin/desktop-launch
     - bin/graphics-core22-wrapper
-    - usr/bin/snapcraft-preload
     - usr/local/bin/retroarch.wrapper
     command: usr/local/bin/retroarch
     environment:
@@ -95,18 +96,6 @@ apps:
 #      - screen-inhibit-control
 
 parts:
-  snapcraft-preload:
-    source: https://github.com/sergiusens/snapcraft-preload.git
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/usr -DLIBPATH=/lib
-    build-packages:
-      - on amd64:
-        - gcc-multilib
-        - g++-multilib
-    stage-packages:
-      - on amd64:
-        - lib32stdc++6
   retroarch-wrapper:
     plugin: dump
     after: [desktop-qt5]
@@ -219,9 +208,6 @@ parts:
      - libdbus-1-dev
      - libdecor-0-dev
      - libsdl2-dev
-   override-build: |
-     craftctl default
-     ln -sf ../usr/lib/libsnapcraft-preload.so $CRAFT_PART_INSTALL/lib/libsnapcraft-preload.so
   retroarch-filters:
     plugin: autotools
     after: [retroarch]
@@ -348,7 +334,6 @@ parts:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
-    after: [snapcraft-preload]
     make-parameters: ["FLAVOR=qt5"]
     build-packages:
       - build-essential
