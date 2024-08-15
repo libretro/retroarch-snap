@@ -231,9 +231,7 @@ parts:
      ozone: .config/assets/ozone/
      sounds: .config/assets/sounds/
      menu_widgets: .config/assets/menu_widgets/
-#    filesets:
-#      assets: [.config/assets/menu_widgets/*, .config/assets/sounds/*, .config/assets/ozone/*, .config/assets/rgui/*, .config/assets/xmb/*, -.config/assets/xmb/*/src, .config/assets/glui/*.png, .config/assets/glui/*.ttf]
-    stage:
+    stage: &_assets
     - -configure
     - -Makefile
     - .config/assets/menu_widgets/*
@@ -244,15 +242,7 @@ parts:
     - -.config/assets/xmb/*/src
     - .config/assets/glui/*.png
     - .config/assets/glui/*.ttf]
-    prime:
-    - .config/assets/menu_widgets/*
-    - .config/assets/sounds/*
-    - .config/assets/ozone/*
-    - .config/assets/rgui/*
-    - .config/assets/xmb/*
-    - -.config/assets/xmb/*/src
-    - .config/assets/glui/*.png
-    - .config/assets/glui/*.ttf]
+    prime: *_assets
   retroarch-autoconfig:
     plugin: dump
     after: [retroarch-assets]
@@ -263,18 +253,12 @@ parts:
       linuxraw: .config/autoconfig/linuxraw/
       hid: .config/autoconfig/hid/
       x: .config/autoconfig/x/
-#    filesets:
-#      autoconfig: [ .config/autoconfig/udev, .config/autoconfig/linuxraw, .config/autoconfig/hid, .config/autoconfig/x]
-    stage:
+    stage: &_autoconfig
     - .config/autoconfig/udev
     - .config/autoconfig/linuxraw
     - .config/autoconfig/hid
     - .config/autoconfig/x
-    prime:
-    - .config/autoconfig/udev
-    - .config/autoconfig/linuxraw
-    - .config/autoconfig/hid
-    - .config/autoconfig/x
+    prime: *_autoconfig
   retroarch-database:
     plugin: dump
     after: [retroarch-autoconfig]
