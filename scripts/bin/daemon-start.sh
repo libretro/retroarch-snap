@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ -S $(dirname "${XDG_RUNTIME_DIR}")/${WAYLAND_DISPLAY:-wayland-0} ] && ! snapctl is-connected wayland
-then
-   echo "WARNING: wayland interface not connected! Please run as superuser: snap connect retroarch:wayland"
-fi
-
 wait_for()
 {
    until
@@ -33,6 +28,9 @@ then
    wait_for "${WAYLAND_DISPLAY}"
 
    mkdir -p "$XDG_RUNTIME_DIR" -m 700
+elif [ -S $(dirname "${XDG_RUNTIME_DIR}")/${WAYLAND_DISPLAY:-wayland-0} ]
+then
+   echo "WARNING: wayland interface not connected! Please run as superuser: snap connect retroarch:wayland"
 fi
 
 unset DISPLAY
