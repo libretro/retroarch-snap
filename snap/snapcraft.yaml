@@ -45,16 +45,16 @@ layout:
 
 apps:
   retroarch:
-    #extensions:
-    #  - kde-neon
+#    extensions:
+#      - kde-neon
     command-chain:
     - bin/desktop-launch
     - bin/graphics-core22-wrapper
-    - usr/local/bin/retroarch.wrapper
+    - bin/retroarch.wrapper
     command: usr/local/bin/retroarch
-    environment:
+    environment: &_environment
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-    plugs:
+    plugs: &_plugs
       - network
       - network-bind
       - x11
@@ -74,38 +74,26 @@ apps:
       - browser-support
       - hardware-observe
       - mount-observe
-#  daemon:
-#    command: $SNAP/usr/bin/snapcraft-preload $SNAP/usr/local/bin/daemon-start.sh $SNAP/usr/local/bin/retroarch.wrapper
-#    environment:
-#      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/pulseaudio:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/xorg
-#    daemon: simple
-#    restart-condition: always
-#    plugs:
-#      - network
-#      - network-bind
-#      - opengl
-#      - home
-#      - alsa
-#      - audio-playback
-#      - bluez
-#      - joystick
-#      - raw-usb
-#      - removable-media
-#      - wayland
-#      - unity7
-#      - screen-inhibit-control
+  daemon:
+    command-chain:
+    - bin/daemon-start.sh
+    - bin/desktop-launch
+    - bin/graphics-core22-wrapper
+    - bin/retroarch.wrapper
+    command: usr/local/bin/retroarch -f -v
+    daemon: simple
+    restart-delay: 3s
+    restart-condition: always
+    environment: *_environment
+    plugs: *_plugs
 
 parts:
   retroarch-wrapper:
     plugin: dump
     after: [desktop-qt5]
-    source: .
-    organize:
-     retroarch.wrapper: usr/local/bin/retroarch.wrapper
-#     daemon-start.sh: usr/local/bin/daemon-start.sh
-    stage:
-      - usr/local/bin/retroarch.wrapper
-#      - usr/local/bin/daemon-start.sh
+    source: scripts
+    stage-packages:
+      - inotify-tools
   retroarch:
    plugin: autotools
 #   source-type: tar
@@ -231,9 +219,7 @@ parts:
      ozone: .config/assets/ozone/
      sounds: .config/assets/sounds/
      menu_widgets: .config/assets/menu_widgets/
-#    filesets:
-#      assets: [.config/assets/menu_widgets/*, .config/assets/sounds/*, .config/assets/ozone/*, .config/assets/rgui/*, .config/assets/xmb/*, -.config/assets/xmb/*/src, .config/assets/glui/*.png, .config/assets/glui/*.ttf]
-    stage:
+    stage: &_assets
     - -configure
     - -Makefile
     - .config/assets/menu_widgets/*
@@ -244,15 +230,7 @@ parts:
     - -.config/assets/xmb/*/src
     - .config/assets/glui/*.png
     - .config/assets/glui/*.ttf]
-    prime:
-    - .config/assets/menu_widgets/*
-    - .config/assets/sounds/*
-    - .config/assets/ozone/*
-    - .config/assets/rgui/*
-    - .config/assets/xmb/*
-    - -.config/assets/xmb/*/src
-    - .config/assets/glui/*.png
-    - .config/assets/glui/*.ttf]
+    prime: *_assets
   retroarch-autoconfig:
     plugin: dump
     after: [retroarch-assets]
@@ -263,18 +241,12 @@ parts:
       linuxraw: .config/autoconfig/linuxraw/
       hid: .config/autoconfig/hid/
       x: .config/autoconfig/x/
-#    filesets:
-#      autoconfig: [ .config/autoconfig/udev, .config/autoconfig/linuxraw, .config/autoconfig/hid, .config/autoconfig/x]
-    stage:
+    stage: &_autoconfig
     - .config/autoconfig/udev
     - .config/autoconfig/linuxraw
     - .config/autoconfig/hid
     - .config/autoconfig/x
-    prime:
-    - .config/autoconfig/udev
-    - .config/autoconfig/linuxraw
-    - .config/autoconfig/hid
-    - .config/autoconfig/x
+    prime: *_autoconfig
   retroarch-database:
     plugin: dump
     after: [retroarch-autoconfig]
