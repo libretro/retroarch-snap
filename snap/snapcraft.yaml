@@ -85,7 +85,26 @@ apps:
     restart-delay: 3s
     restart-condition: always
     environment: *_environment
-    plugs: *_plugs
+    plugs:
+      - network
+      - network-bind
+      - x11
+      - opengl
+      - home
+      - alsa
+      - audio-playback
+      - bluez
+      - joystick
+      - raw-usb
+      - removable-media
+      - wayland
+      - unity7
+      - desktop
+      - desktop-legacy
+      - screen-inhibit-control
+#      - browser-support  # 'daemon' should not be used with 'browser-support' security-snap-v2_daemon_with_browser-support (daemon)
+      - hardware-observe
+      - mount-observe
 
 parts:
   retroarch-wrapper:
