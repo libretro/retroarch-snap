@@ -1,5 +1,5 @@
 name: retroarch
-version: "1.19.1"
+adopt-info: retroarch  # define the version at `retroarch` part
 title: RetroArch
 summary: RetroArch is the official reference frontend for the libretro API.
 description: |
@@ -115,8 +115,6 @@ parts:
       - inotify-tools
   retroarch:
    plugin: autotools
-#   source-type: tar
-#   source: https://github.com/libretro/RetroArch/archive/v1.13.0.tar.gz
    source-type: git
    source: https://github.com/libretro/RetroArch.git
    after: [retroarch-wrapper]
@@ -215,6 +213,18 @@ parts:
      - libdbus-1-dev
      - libdecor-0-dev
      - libsdl2-dev
+   override-pull: |
+     craftctl default
+     tag=$(git describe --tags --abbrev=0)
+     count=$(git rev-list $tag.. --count)
+     if [ "$count" = 0 ];
+     then
+       version=${tag:1}
+     else
+       hash=$(git rev-parse --short=7 HEAD)
+       version=${tag:1}+git${count}.${hash}
+     fi
+     craftctl set version=$version
   retroarch-filters:
     plugin: autotools
     after: [retroarch]
