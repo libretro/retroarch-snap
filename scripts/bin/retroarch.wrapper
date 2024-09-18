@@ -2,10 +2,18 @@
 
 set -e
 
-MAINCONFIG="$SNAP_USER_DATA/.config/retroarch/retroarch.cfg"
+# Moving data of the older revisions to the common user folder
+[ -d $SNAP_USER_DATA/.config/retroarch ] && mkdir $SNAP_USER_COMMON/.config && mv -f $SNAP_USER_DATA/.config/retroarch $SNAP_USER_COMMON/.config
+
+# HACK: re-export to prevent copying data after refreshing
+[ -n $XDG_CONFIG_HOME ] && export XDG_CONFIG_HOME=${XDG_CONFIG_HOME/$HOME/$SNAP_USER_COMMON}
+export HOME=$SNAP_USER_COMMON
+
+[ -n $XDG_CONFIG_HOME ] && RETRO_DATA_DIR="${XDG_CONFIG_HOME}/retroarch" || RETRO_DATA_DIR="${HOME}/.config/retroarch"
+MAINCONFIG="${RETRO_DATA_DIR}/retroarch.cfg"
 FILESETS=('assets' 'autoconfig' 'cheats' 'cores' 'database' 'filters' 'overlay' 'shaders')
 
-_notify() {
+retro_notify() {
    local msg=$1
    local timeout=2000
    local icon="$SNAP/.config/assets/xmb/monochrome/png/retroarch.png"
@@ -14,28 +22,32 @@ _notify() {
 }
 
 # Notify user that we're working so they don't think anything is broken
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Preparing the environment..."
+[ ! -d "$RETRO_DATA_DIR" ] && retro_notify "Preparing the environment..."
 
 # Notify the user that it might take a while to copy everything
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && _notify "Copying necessary files (this could take a minute)..."
+[ ! -d "$RETRO_DATA_DIR" ] && retro_notify "Copying necessary files (this could take a minute)..."
 
 # Create RetroArch user configuration directory if doesn't exist
-[ ! -d "$SNAP_USER_DATA/.config" ] && mkdir "$SNAP_USER_DATA/.config"
-[ ! -d "$SNAP_USER_DATA/.config/retroarch" ] && mkdir "$SNAP_USER_DATA/.config/retroarch"
+[ ! -d "$SNAP_USER_COMMON/.config" ] && mkdir "$SNAP_USER_COMMON/.config"
+[ ! -d "$RETRO_DATA_DIR" ] && mkdir "$RETRO_DATA_DIR"
 
 # Copy filesets if doesn't exist
 for fileset in ${FILESETS[@]};
 do
-   if [ ! -d "$SNAP_USER_DATA/.config/retroarch/$fileset" ];
+   if [ ! -d "$RETRO_DATA_DIR/$fileset" ];
    then
-      cp -R "$SNAP/.config/$fileset" "$SNAP_USER_DATA/.config/retroarch"
+      cp -R "$SNAP/.config/$fileset" "$RETRO_DATA_DIR"
    fi
 done
 
-[ ! -f "$SNAP_USER_DATA/.config/retroarch/retroarch.cfg" ] && _notify "Done!"
+[ ! -f "$RETRO_DATA_DIR/retroarch.cfg" ] && retro_notify "Done!"
 
 # If the config file doesn't exist, create it and point the browser directory outside of the snap package
-[ ! -f "$MAINCONFIG" ] && echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$MAINCONFIG" && echo "input_joypad_driver = sdl2" >> "$MAINCONFIG"
+if [ ! -f "$MAINCONFIG" ]
+then
+   echo "rgui_browser_directory = $SNAP_REAL_HOME" >> "$MAINCONFIG"
+   echo "input_joypad_driver = sdl2"               >> "$MAINCONFIG"
+fi
 
 # Make PulseAudio socket available inside the snap-specific $XDG_RUNTIME_DIR
 if [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/../pulse/native" ];
