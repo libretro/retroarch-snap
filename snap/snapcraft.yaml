@@ -109,7 +109,7 @@ apps:
 parts:
   retroarch-wrapper:
     plugin: dump
-    after: [desktop-qt5]
+#    after: [desktop-qt5]
     source: scripts
     stage-packages:
       - inotify-tools
@@ -135,7 +135,7 @@ parts:
      - --disable-vg
      - --disable-v4l2
      - --disable-xinerama
-     - --enable-qt
+     - --disable-qt
      - --enable-vulkan
      - --enable-discord
      - --enable-dbus
@@ -163,9 +163,9 @@ parts:
      - libxkbcommon0
      - libxv1
      - zlib1g
-     - qtbase5-dev
-     - qtwayland5
-     - libqt5waylandclient5
+#     - qtbase5-dev
+#     - qtwayland5
+#     - libqt5waylandclient5
      - libstdc++6
      - libgcc1
      - liblzma5
@@ -206,8 +206,8 @@ parts:
      - mesa-common-dev
      - xserver-xorg-input-all
      - zlib1g-dev
-     - qtbase5-dev
-     - qt5-qmake
+#     - qtbase5-dev
+#     - qt5-qmake
      - libvulkan-dev
      - libxxf86vm-dev
      - libdbus-1-dev
@@ -331,30 +331,30 @@ parts:
   # check the source for updates and copy the changes.
   #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   #
-  desktop-qt5:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
-    plugin: make
-    make-parameters: ["FLAVOR=qt5"]
-    build-packages:
-      - build-essential
-      - qtbase5-dev
-      - dpkg-dev
-    stage-packages:
-      - libxkbcommon0
-      - fonts-ubuntu
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libqt5gui5
-      - libgtk2.0-0
-      - libgdk-pixbuf2.0-0
-      - libqt5svg5  # for loading icon themes which are svg
-      - locales-all
-      - xdg-user-dirs
-      - fcitx-frontend-qt5
+#  desktop-qt5:
+#    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+#    source-subdir: qt
+#    plugin: make
+#    make-parameters: ["FLAVOR=qt5"]
+#    build-packages:
+#      - build-essential
+#      - qtbase5-dev
+#      - dpkg-dev
+#    stage-packages:
+#      - libxkbcommon0
+#      - fonts-ubuntu
+#      - dmz-cursor-theme
+#      - light-themes
+#      - adwaita-icon-theme
+#      - gnome-themes-standard
+#      - shared-mime-info
+#      - libqt5gui5
+#      - libgtk2.0-0
+#      - libgdk-pixbuf2.0-0
+#      - libqt5svg5  # for loading icon themes which are svg
+#      - locales-all
+#      - xdg-user-dirs
+#      - fcitx-frontend-qt5
   graphics-core22:
     after: [retroarch]
     source: https://github.com/canonical/gpu-snap.git
