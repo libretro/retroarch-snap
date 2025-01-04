@@ -135,7 +135,7 @@ parts:
      - --disable-vg
      - --disable-v4l2
      - --disable-xinerama
-     - --disable-qt
+#     - --enable-qt
      - --enable-vulkan
      - --enable-discord
      - --enable-dbus
@@ -163,9 +163,9 @@ parts:
      - libxkbcommon0
      - libxv1
      - zlib1g
-#     - qtbase5-dev
-#     - qtwayland5
-#     - libqt5waylandclient5
+     - qtbase5-dev
+     - qtwayland5
+     - libqt5waylandclient5
      - libstdc++6
      - libgcc1
      - liblzma5
@@ -206,8 +206,8 @@ parts:
      - mesa-common-dev
      - xserver-xorg-input-all
      - zlib1g-dev
-#     - qtbase5-dev
-#     - qt5-qmake
+     - qtbase5-dev
+     - qt5-qmake
      - libvulkan-dev
      - libxxf86vm-dev
      - libdbus-1-dev
