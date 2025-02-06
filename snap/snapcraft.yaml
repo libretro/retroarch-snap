@@ -135,7 +135,7 @@ parts:
      - --disable-vg
      - --disable-v4l2
      - --disable-xinerama
-#     - --enable-qt
+     - --enable-qt
      - --enable-vulkan
      - --enable-discord
      - --enable-dbus
