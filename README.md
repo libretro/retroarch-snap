@@ -13,8 +13,10 @@ You will need to use the Online Updater to install cores.
 ## Daemon mode
 
 [snap.retroarch.daemon.service](https://snapcraft.io/docs/services-and-daemons#defining-a-daemon) systemd unit will automatically enabled and started after installation on Ubuntu Core. On other versions of GNU/Linux to activate daemon run as root the following command:
-> WARNING! For most desktop distributions this is not needed
 
-```console
-$ snap set ubuntu-frame daemon=true && snap start --enable retroarch.daemon
+> [!WARNING]
+> For most desktop distributions this isn't needed
+
+```shell
+snap set ubuntu-frame daemon=true && snap start --enable retroarch.daemon
 ```
