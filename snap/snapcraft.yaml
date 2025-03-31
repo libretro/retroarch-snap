@@ -53,7 +53,7 @@ apps:
     - bin/retroarch.wrapper
     command: usr/local/bin/retroarch
     environment: &_environment
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack:$SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
     plugs: &_plugs
       - network
       - network-bind
@@ -74,6 +74,7 @@ apps:
       - browser-support
       - hardware-observe
       - mount-observe
+      - camera
   daemon:
     command-chain:
     - bin/daemon-start.sh
@@ -182,6 +183,8 @@ parts:
 #     - libdecor-0-0
      - libdecor-0-plugin-1-cairo
      - libsdl2-2.0-0
+     - libavdevice58
+     - libblas3
    build-packages:
      - gcc
      - make
