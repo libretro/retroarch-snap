@@ -14,46 +14,26 @@ license: GPL-3.0
 icon: snap/gui/retroarch.svg
 confinement: strict
 grade: stable
-architectures:
-- build-on: [amd64]
-  build-for: [amd64]
-- build-on: [armhf]
-  build-for: [armhf]
-- build-on: [arm64]
-  build-for: [arm64]
-- build-on: [ppc64el]
-  build-for: [ppc64el]
-base: core22
+platforms:
+  amd64:
+  armhf:
+  arm64:
+  ppc64el:
+base: core24
 
 plugs:
-  graphics-core22:
-    interface: content
-    target: $SNAP/graphics
-    default-provider: mesa-core22
   shared-memory:  # Required by some cores such as dolphin-libretro and swanstation-libretro
     private: true
 
-layout:
-  /usr/share/libdrm:
-    bind: $SNAP/graphics/libdrm
-  /usr/share/drirc.d:
-    symlink: $SNAP/graphics/drirc.d
-  /usr/share/X11/XErrorDB:
-    symlink: $SNAP/graphics/X11/XErrorDB
-  /usr/share/X11/locale:
-    symlink: $SNAP/graphics/X11/locale
-
 apps:
   retroarch:
-#    extensions:
-#      - kde-neon
+    extensions: [gnome]
     command-chain:
-    - bin/desktop-launch
-    - bin/graphics-core22-wrapper
     - bin/retroarch.wrapper
     command: usr/local/bin/retroarch
     environment: &_environment
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack:$SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack
+      QT_PLUGIN_PATH: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
     plugs: &_plugs
       - network
       - network-bind
@@ -71,171 +51,156 @@ apps:
       - desktop
       - desktop-legacy
       - screen-inhibit-control
-      - browser-support
       - hardware-observe
       - mount-observe
       - camera
   daemon:
     command-chain:
     - bin/daemon-start.sh
-    - bin/desktop-launch
-    - bin/graphics-core22-wrapper
     - bin/retroarch.wrapper
     command: usr/local/bin/retroarch -f -v
     daemon: simple
     restart-delay: 3s
     restart-condition: always
     environment: *_environment
-    plugs:
-      - network
-      - network-bind
-      - x11
-      - opengl
-      - home
-      - alsa
-      - audio-playback
-      - bluez
-      - joystick
-      - raw-usb
-      - removable-media
-      - wayland
-      - unity7
-      - desktop
-      - desktop-legacy
-      - screen-inhibit-control
-#      - browser-support  # 'daemon' should not be used with 'browser-support' security-snap-v2_daemon_with_browser-support (daemon)
-      - hardware-observe
-      - mount-observe
+    plugs: *_plugs
 
 parts:
   retroarch-wrapper:
     plugin: dump
-    after: [desktop-qt5]
     source: scripts
     stage-packages:
       - inotify-tools
   retroarch:
-   plugin: autotools
-   source-type: git
-   source: https://github.com/libretro/RetroArch.git
-   after: [retroarch-wrapper]
-   build-environment:
-     - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
-   autotools-configure-parameters:
-     - --enable-kms
-     - --enable-xvideo
-     - --enable-ffmpeg
-     - --enable-ssa
-     - --disable-coreaudio
-     - --enable-jack
-     - --enable-pulse
-     - --disable-roar
-     - --disable-rsound
-     - --disable-sdl
-     - --enable-sdl2
-     - --disable-vg
-     - --disable-v4l2
-     - --disable-xinerama
-     - --enable-qt
-     - --enable-vulkan
-     - --enable-discord
-     - --enable-dbus
-   stage-packages:
-     - libnotify-bin
-     - fonts-dejavu-core
-     - freeglut3-dev
-     - libasound2
-     - libavcodec58
-     - libavformat58
-     - libavutil56
-     - libfreetype6
-     - libgbm1
-     - libjack-jackd2-0
-     - libminizip1
-     - libopenal1
-     - libpulse0
-     - libswresample3
-     - libswscale5
-     - libudev1
-     - libusb-1.0-0
-     - libxrandr-dev
-     - libxext6
-     - libxinerama1
-     - libxkbcommon0
-     - libxv1
-     - zlib1g
-     - qtbase5-dev
-     - qtwayland5
-     - libqt5waylandclient5
-     - libstdc++6
-     - libgcc1
-     - liblzma5
-     - libbz2-1.0
-     - libpcre3
-     - libsystemd0
-     - libass9
-     - libfribidi0
-     - libsdl1.2debian
-     - libsdl-net1.2
-     - libbluetooth3
-     - libxi6
-     - libaio1
-#     - libdecor-0-0
-     - libdecor-0-plugin-1-cairo
-     - libsdl2-2.0-0
-     - libavdevice58
-     - libblas3
-   build-packages:
-     - gcc
-     - make
-     - libasound2-dev
-     - libass-dev
-     - libavcodec-dev
-     - libavdevice-dev
-     - libavformat-dev
-     - libdrm-dev
-     - libegl1-mesa-dev
-     - libfreetype6-dev
-     - libgbm-dev
-     - libgl1-mesa-dev
-     - libjack-jackd2-dev
-     - libpulse-dev
-     - libswscale-dev
-     - libusb-1.0-0-dev
-     - libudev-dev
-     - libx11-xcb-dev
-     - libxml2-dev
-     - libxv-dev
-     - mesa-common-dev
-     - xserver-xorg-input-all
-     - zlib1g-dev
-     - qtbase5-dev
-     - qt5-qmake
-     - libvulkan-dev
-     - libxxf86vm-dev
-     - libdbus-1-dev
-     - libdecor-0-dev
-     - libsdl2-dev
-   override-pull: |
-     craftctl default
-     tag=$(git describe --tags --abbrev=0)
-     count=$(git rev-list $tag.. --count)
-     if [ "$count" = 0 ];
-     then
-       version=${tag:1}
-     else
-       hash=$(git rev-parse --short=7 HEAD)
-       version=${tag:1}+git${count}.${hash}
-     fi
-     craftctl set version=$version
+    plugin: autotools
+    source-type: git
+    source: https://github.com/libretro/RetroArch.git
+    #source-branch: steamdeck                                 # To build from a non-default branch
+    #source-tag: v1.20.0                                      # To build from a tag
+    #source-commit: ab3b175848fa6cd8b2340809631e30bc0fe1d136  # Requires the full 40-character SHA-1
+    after: [retroarch-wrapper]
+    build-environment:
+      - MAKEFLAGS: HAVE_BUILTINZLIB=0 HAVE_ZLIB_COMMON=1
+    autotools-configure-parameters:
+      - --enable-kms
+      - --enable-xvideo
+      - --enable-ffmpeg
+      - --enable-ssa
+      - --disable-coreaudio
+      - --enable-jack
+      - --enable-pulse
+      - --disable-roar
+      - --disable-rsound
+      - --disable-sdl
+      - --enable-sdl2
+      - --disable-vg
+      - --disable-v4l2
+      - --disable-xinerama
+      - --enable-qt
+      - --enable-vulkan
+      - --enable-discord
+      - --enable-dbus
+    stage-packages:
+      - libnotify-bin
+      - fonts-dejavu-core
+      - freeglut3-dev
+      - libasound2t64
+      - libavcodec60
+      - libavformat60
+      - libavutil58
+      - libfreetype6
+      - libgbm1
+      - libjack-jackd2-0
+      #- libpipewire-0.3-dev
+      - libminizip1
+      - libopenal1
+      - libpulse0
+      - libswresample4
+      - libswscale7
+      - libudev1
+      - libusb-1.0-0
+      - libxrandr-dev
+      - libxext6
+      - libxinerama1
+      - libxkbcommon0
+      - libxv1
+      - zlib1g
+      - libqt6core6t64
+      - libqt6gui6t64
+      - libqt6widgets6t64
+      - libqt6concurrent6t64
+      - libqt6network6t64
+      - qt6-wayland
+      - libstdc++6
+      - libgcc1
+      - liblzma5
+      - libbz2-1.0
+      - libpcre3
+      - libsystemd0
+      - libass9
+      - libfribidi0
+      - libsdl1.2debian
+      - libsdl-net1.2
+      - libbluetooth3
+      - libxi6
+      - libaio1t64
+      - libdecor-0-0
+      - libdecor-0-plugin-1-cairo
+      - libsdl2-2.0-0
+      - libdbus-1-3
+      - libavdevice60
+      - libblas3
+    build-packages:
+      - gcc
+      - make
+      - libasound2-dev
+      - libass-dev
+      - libavcodec-dev
+      - libavdevice-dev
+      - libavformat-dev
+      - libdrm-dev
+      - libegl1-mesa-dev
+      - libfreetype6-dev
+      - libgbm-dev
+      - libgl1-mesa-dev
+      - libjack-jackd2-dev
+      - libpulse-dev
+      - libswscale-dev
+      - libusb-1.0-0-dev
+      - libudev-dev
+      - libx11-xcb-dev
+      - libxml2-dev
+      - libxv-dev
+      - mesa-common-dev
+      - xserver-xorg-input-all
+      - zlib1g-dev
+      - libvulkan-dev
+      - libxxf86vm-dev
+      - libdbus-1-dev
+      - libdecor-0-dev
+      - libsdl2-dev
+      - qt6-base-dev
+      - qmake6-bin
+    override-pull: |
+      craftctl default
+      tag=$(git describe --tags --abbrev=0)
+      count=$(git rev-list $tag.. --count)
+      if [ "$count" = 0 ];
+      then
+        version=${tag:1}
+      else
+        hash=$(git rev-parse --short=7 HEAD)
+        version=${tag:1}+git${count}.${hash}
+      fi
+      craftctl set version=$version
   retroarch-filters:
     plugin: autotools
     after: [retroarch]
     source: https://github.com/libretro/RetroArch.git
     source-type: git
     override-build: |
-     cd libretro-common/audio/dsp_filters/ && ./configure && make && make install DESTDIR=$CRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR=
-     cd ../../../gfx/video_filters/ && ./configure && make && make install DESTDIR=$CRAFT_PART_INSTALL/.config/filters/video INSTALLDIR=
+     pushd libretro-common/audio/dsp_filters/ && ./configure && make && make install DESTDIR=$CRAFT_PART_INSTALL/.config/filters/audio INSTALLDIR= && popd
+     pushd gfx/video_filters/ && ./configure && make && make install DESTDIR=$CRAFT_PART_INSTALL/.config/filters/video INSTALLDIR= && popd
     stage:
       - .config/filters/video
       - .config/filters/audio
@@ -327,43 +292,3 @@ parts:
      "*": .config/shaders/shaders_slang/
     stage:
      - .config/shaders
-  # This part installs the qt5 dependencies and a `desktop-launch` script to initialise
-  # desktop-specific features such as fonts, themes and the XDG environment.
-  #
-  # It is copied straight from the snapcraft desktop helpers project. Please periodically
-  # check the source for updates and copy the changes.
-  #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
-  #
-  desktop-qt5:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
-    plugin: make
-    make-parameters: ["FLAVOR=qt5"]
-    build-packages:
-      - build-essential
-      - qtbase5-dev
-      - dpkg-dev
-    stage-packages:
-      - libxkbcommon0
-      - fonts-ubuntu
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libqt5gui5
-      - libgtk2.0-0
-      - libgdk-pixbuf2.0-0
-      - libqt5svg5  # for loading icon themes which are svg
-      - locales-all
-      - xdg-user-dirs
-      - fcitx-frontend-qt5
-  graphics-core22:
-    after: [retroarch]
-    source: https://github.com/canonical/gpu-snap.git
-    plugin: dump
-    override-prime: |
-      craftctl default
-      ${CRAFT_PART_SRC}/bin/graphics-core22-cleanup mesa-core22 nvidia-core22
-    prime:
-    - bin/graphics-core22-wrapper
