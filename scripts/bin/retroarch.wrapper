@@ -2,13 +2,13 @@
 
 set -e
 
-if [ ! -d $SNAP_USER_DATA/.config/retroarch ];
+if [ ! -d $SNAP_USER_DATA/.config/retroarch ]
 then
-   [ -n $XDG_CONFIG_HOME ] && export XDG_CONFIG_HOME=${XDG_CONFIG_HOME/$HOME/$SNAP_USER_COMMON}
+   [ -n "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME=${XDG_CONFIG_HOME/$HOME/$SNAP_USER_COMMON}
    export HOME=$SNAP_USER_COMMON
 fi
 
-[ -n $XDG_CONFIG_HOME ] && SNAP_LIBRETRO_DIRECTORY="${XDG_CONFIG_HOME}/retroarch" || SNAP_LIBRETRO_DIRECTORY="${HOME}/.config/retroarch"
+[ -n "$XDG_CONFIG_HOME" ] && SNAP_LIBRETRO_DIRECTORY="${XDG_CONFIG_HOME}/retroarch" || SNAP_LIBRETRO_DIRECTORY="${HOME}/.config/retroarch"
 MAINCONFIG="${SNAP_LIBRETRO_DIRECTORY}/retroarch.cfg"
 FILESETS=('assets' 'autoconfig' 'cheats' 'cores' 'database' 'filters' 'overlay' 'shaders')
 
@@ -32,7 +32,7 @@ retro_notify()
 [ ! -d "$SNAP_LIBRETRO_DIRECTORY" ] && mkdir "$SNAP_LIBRETRO_DIRECTORY"
 
 # Copy filesets if doesn't exist
-for fileset in ${FILESETS[@]};
+for fileset in ${FILESETS[@]}
 do
    if [ ! -d "$SNAP_LIBRETRO_DIRECTORY/$fileset" ];
    then
@@ -47,6 +47,12 @@ if [ ! -f "$MAINCONFIG" ]
 then
    echo "rgui_browser_directory = \"$SNAP_REAL_HOME\"" >> "$MAINCONFIG"
    echo "input_joypad_driver = \"sdl2\""               >> "$MAINCONFIG"
+fi
+
+# Make PulseAudio socket available inside the snap-specific $XDG_RUNTIME_DIR
+if [ -n "$XDG_RUNTIME_DIR" ] && [ -S "$XDG_RUNTIME_DIR/../pulse/native" ]
+then
+   export PULSE_SERVER="unix:$XDG_RUNTIME_DIR/../pulse/native"
 fi
 
 exec "$@"

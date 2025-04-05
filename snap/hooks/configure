@@ -1,5 +1,4 @@
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh -e
 
 daemon=$(snapctl get daemon)
 case "$daemon" in
