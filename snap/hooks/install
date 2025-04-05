@@ -1,5 +1,4 @@
-#!/bin/sh
-set -eux
+#!/bin/sh -e
 
 # we install with the daemon disabled, the configure hook
 # will start and enable it if appropriate
