@@ -62,6 +62,7 @@ apps:
       - hardware-observe
       - mount-observe
       - camera
+      - pipewire
   daemon:
     command-chain:
     - bin/daemon-start.sh
@@ -120,7 +121,7 @@ parts:
       - libfreetype6
       - libgbm1
       - libjack-jackd2-0
-      #- libpipewire-0.3-dev
+      - libpipewire-0.3-dev
       - libminizip1t64
       - libopenal1
       - libpulse0
