@@ -1,5 +1,5 @@
 name: retroarch
-adopt-info: retroarch  # define the version at `retroarch` part
+adopt-info: retroarch  # detect version at `retroarch` part
 title: RetroArch
 summary: RetroArch is the official reference frontend for the libretro API.
 description: |
@@ -10,16 +10,31 @@ description: |
   RetroArch defaults to a gamepad-friendly 10-foot/leanback interface that is perfect for use with living-room and home theater PCs, but there is also a more traditional keyboard-and-mouse interface available by pressing F5.
 
   RetroArch is written in portable C and licensed GPLv3.
+
+website: https://www.retroarch.com
+contact: https://forums.libretro.com
+donation:
+  - https://patreon.com/libretro
+  - https://github.com/sponsors/libretro
+source-code:
+  - https://github.com/libretro/RetroArch
+  - https://github.com/libretro/retroarch-snap
+issues:
+  - https://github.com/libretro/RetroArch/issues
+  - https://github.com/libretro/retroarch-snap/issues
+
 license: GPL-3.0
 icon: snap/gui/retroarch.svg
+
+base: core24
 confinement: strict
 grade: stable
+
 platforms:
   amd64:
   armhf:
   arm64:
   ppc64el:
-base: core24
 
 plugs:
   gpu-2404:
