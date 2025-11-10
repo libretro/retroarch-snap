@@ -100,7 +100,7 @@ parts:
     source-type: git
     source: https://github.com/libretro/RetroArch.git
     #source-branch: steamdeck                                 # To build from a non-default branch
-    source-tag: v1.21.1                                      # To build from a tag
+    source-tag: v1.22.0                                      # To build from a tag
     #source-commit: ab3b175848fa6cd8b2340809631e30bc0fe1d136  # Requires the full 40-character SHA-1
     after: [retroarch-wrapper]
     build-environment:
