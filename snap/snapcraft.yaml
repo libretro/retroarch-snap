@@ -90,12 +90,28 @@ apps:
     plugs: *_plugs
 
 parts:
+  sdl3:
+    plugin: cmake
+    source: https://github.com/libsdl-org/SDL.git
+    source-tag: release-3.4.2
+    build-packages:
+      - libdrm-dev
+      - libxkbcommon-dev
+      - libxss-dev
+      - libfribidi-dev
+      - libxcursor-dev
+      - libxi-dev
+      - libxrandr-dev
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo    
   retroarch-wrapper:
     plugin: dump
     source: scripts
     stage-packages:
       - inotify-tools
   retroarch:
+    after: [sdl3]
     plugin: autotools
     source-type: git
     source: https://github.com/libretro/RetroArch.git
@@ -202,7 +218,7 @@ parts:
       - libxxf86vm-dev
       - libdbus-1-dev
       - libdecor-0-dev
-      - libsdl2-dev
+      - libsdl3-dev
       - qt6-base-dev
       - qmake6-bin
     override-pull: |
